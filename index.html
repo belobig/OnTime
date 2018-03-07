@@ -9,11 +9,6 @@
 	<title>OnTime</title>
 
 
-	<!-- temp: bootstrap cdn link -->
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-	 crossorigin="anonymous">
-
 	<!-- Linking CSS File -->
 	<link rel="stylesheet" href="./assets/css/style.css">
 
@@ -22,14 +17,22 @@
 
 <body>
 
-	<p>Google Calendar API Quickstart</p>
 <!-- navbar -->
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="#">OnTime</a>
-			<p class="navbar-text navbar-right">Signed in as
-				<a href="#" class="navbar-link">Sign In</a>
-			</p>
+			<ul class="nav navbar-nav navbar-right">
+				<li>
+					<div id="firebaseui-auth-container"></div>
+				</li>
+				<li>
+					<div id="sign-in"></div>
+				</li>
+				<li>
+					<div id="account-details"></div>
+				</li>
+			</ul>
+
 		</div>
 	</nav>
 	<!-- map -->
@@ -61,15 +64,22 @@
 
 	<!-- Adding JQuery -->
 	<script src="./assets/javascript/jquery-3.3.1.min.js"></script>
+
+	<script src="assets/javascript/bootstrap.min.js"></script>
+	<script src="assets/javascript/ontime.js"></script>
+
+
 	<!-- Adding link to API via api.js -->
 	<script src="./assets/javascript/api.js"></script>
 
 	<!-- script link to google map api, runs callback function -->
+
 	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlI91WupqEYc4XBk5dBrfcNKekA_e9aZ0&callback=initMap">
 	</script>
 
 	<!-- script link to google calendar api -->
-	<script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()">
+	<script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
+	
 
 
 
