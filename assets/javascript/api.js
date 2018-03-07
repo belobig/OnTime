@@ -22,8 +22,8 @@ function initMap() {
 ///////----------------------------------------------------------------------------------------------------------------------------------
 
 // Client ID and API key from the Developer Console
-var CLIENT_ID = '680626336941-jq4kcktr2ghv678kmlittf9th7sndsak.apps.googleusercontent.com';
-var API_KEY = 'AIzaSyAlI91WupqEYc4XBk5dBrfcNKekA_e9aZ0';
+var CLIENT_ID = '<YOUR_CLIENT_ID>';
+var API_KEY = '<YOUR_API_KEY>';
 
 // Array of API discovery doc URLs for APIs used by the quickstart
 var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
@@ -32,8 +32,8 @@ var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/
 // included, separated by spaces.
 var SCOPES = "https://www.googleapis.com/auth/calendar.readonly";
 
-var authorizeButton = document.getElementById('firebaseui-auth-container');
-var signoutButton = document.getElementById('signOutBtn');
+var authorizeButton = document.getElementById('authorize-button');
+var signoutButton = document.getElementById('signout-button');
 
 /**
  *  On load, called to load the auth2 library and API client library.
