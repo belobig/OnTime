@@ -9,16 +9,21 @@
 	<title>OnTime</title>
 
 
-	<!-- Linking CSS File -->
+	<!-- temp: bootstrap cdn link -->
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	 crossorigin="anonymous">
 
+	<!-- Linking CSS File -->
 	<link rel="stylesheet" href="./assets/css/style.css">
-	<!-- Bootstrap -->
-	<link rel="stylesheet" href="./assets/css/bootstrap.css">
+
 
 </head>
 
 <body>
-	<!-- navbar -->
+
+	<p>Google Calendar API Quickstart</p>
+<!-- navbar -->
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="#">OnTime</a>
@@ -35,7 +40,14 @@
 				<h1>You must commit!!!!</h1>
 				<div id="map"></div>
 			</div>
-		</div>
+		</div> 
+    <div class="row">
+			<div class="col-sm-12">
+				<pre id="calendar"></pre>
+			</div>
+		</div> 
+    
+    
 	<!-- User input table -->
 		
 	<!-- Appointment Table -->
@@ -44,23 +56,22 @@
 		
 	</div>
 	<!-- Footer -->
-		
 
+
+
+	<!-- Adding JQuery -->
 	<script src="./assets/javascript/jquery-3.3.1.min.js"></script>
+	<!-- Adding link to API via api.js -->
+	<script src="./assets/javascript/api.js"></script>
 
-	<script>
-		function initMap() {
-			var map = new google.maps.Map(document.getElementById('map'), {
-				zoom: 13,
-				center: { lat: 34.04924594193164, lng: -118.24104309082031 }
-			});
-
-			var trafficLayer = new google.maps.TrafficLayer();
-			trafficLayer.setMap(map);
-		}
-	</script>
+	<!-- script link to google map api, runs callback function -->
 	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlI91WupqEYc4XBk5dBrfcNKekA_e9aZ0&callback=initMap">
 	</script>
+
+	<!-- script link to google calendar api -->
+	<script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()">
+
+
 
 </body>
 
