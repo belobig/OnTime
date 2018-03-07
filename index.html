@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
-	<title>Document</title>
+	<title>OnTime</title>
 
 
 	<!-- temp: bootstrap cdn link -->
@@ -17,45 +17,45 @@
 	<!-- Linking CSS File -->
 	<link rel="stylesheet" href="./assets/css/style.css">
 
-	<style>
-		/* temp style tag; remove when layout functional */
-
-		#map,
-		#calendar {
-			height: 400px;
-		}
-	</style>
-
 
 </head>
 
 <body>
 
-	<h1>You must commit!!!!</h1>
-
-	<nav class="nav navbar">
-		<!--Add buttons to initiate auth sequence and sign out-->
-				<button id="authorize-button" style="display: none;">Authorize</button>
-				<button id="signout-button" style="display: none;">Sign Out</button>
+	<p>Google Calendar API Quickstart</p>
+<!-- navbar -->
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#">OnTime</a>
+			<p class="navbar-text navbar-right">Signed in as
+				<a href="#" class="navbar-link">Sign In</a>
+			</p>
+		</div>
 	</nav>
-	<!-- temp; basic bootstrap layout -->
+	<!-- map -->
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-6">
+			<div class="col-sm-12">
+	<!-- next appointment -->
+				<h1>You must commit!!!!</h1>
 				<div id="map"></div>
 			</div>
-			<div class="col-sm-6">
-				
-
+		</div> 
+    <div class="row">
+			<div class="col-sm-12">
 				<pre id="calendar"></pre>
-
-				<!-- <div id="calendar"></div> -->
 			</div>
-		</div>
+		</div> 
+    
+    
+	<!-- User input table -->
+		
+	<!-- Appointment Table -->
+		
+	<!-- Calendar -->
+		
 	</div>
-
-	<p>Google Calendar API Quickstart</p>
-
+	<!-- Footer -->
 
 
 
@@ -70,7 +70,8 @@
 
 	<!-- script link to google calendar api -->
 	<script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()">
-	</script>
+
+
 
 </body>
 
