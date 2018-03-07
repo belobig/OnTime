@@ -22,8 +22,8 @@ function initMap() {
 ///////----------------------------------------------------------------------------------------------------------------------------------
 
 // Client ID and API key from the Developer Console
-var CLIENT_ID = '<YOUR_CLIENT_ID>';
-var API_KEY = '<YOUR_API_KEY>';
+var CLIENT_ID = '680626336941-jq4kcktr2ghv678kmlittf9th7sndsak.apps.googleusercontent.com';
+var API_KEY = 'AIzaSyAlI91WupqEYc4XBk5dBrfcNKekA_e9aZ0';
 
 // Array of API discovery doc URLs for APIs used by the quickstart
 var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
