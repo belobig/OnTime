@@ -1,4 +1,8 @@
 $(document).ready(function () {
+
+	//Initialize tooltips
+	$('[data-toggle="tooltip"]').tooltip();
+
 	// Initialize Firebase
 	var config = {
 		apiKey: "AIzaSyBotbBY-lxslbb-cQaeMtvpFeZuRQNYyvA",
@@ -32,7 +36,7 @@ $(document).ready(function () {
 
 	var signOutBtn = '<button class="btn btn-primary" id="signOutBtn" data-toggle="tooltip" data-placement="left" title="Sign Out"><span class="glyphicon glyphicon-log-out"></span></button>';
 
-	var playArea = '<div class="col-lg-12 text-center whtRndBrdr" id="playArea"><h1>On Time</h1></div>';
+	// var playArea = '<div class="col-lg-12 text-center whtRndBrdr" id="playArea"><h1>On Time</h1></div>';
 
 
 
@@ -60,7 +64,7 @@ $(document).ready(function () {
 					});
 				});
 				
-				$("#mainArea").html(playArea);
+				// $("#mainArea").html(playArea);
 				console.log("User is Signed IN!");
 
 			} else {
@@ -68,7 +72,7 @@ $(document).ready(function () {
 				document.getElementById('account-details').innerHTML = '';
 				document.getElementById('sign-in').innerHTML = '';
 				$("#firebaseui-auth-container").show();
-				$("#mainArea").html('');
+				// $("#mainArea").html('');
 				console.log("User is signed out");
 			}
 		}, function (error) {

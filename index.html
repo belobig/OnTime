@@ -9,11 +9,12 @@
 	<title>OnTime</title>
 
 
-	<!-- Linking CSS File -->
 
-	<link rel="stylesheet" href="./assets/css/style.css">
 	<!-- Bootstrap -->
 	<link rel="stylesheet" href="./assets/css/bootstrap.css">
+	<!-- Linking CSS File -->
+	<link rel="stylesheet" href="./assets/css/style.css">
+
 
 </head>
 
@@ -21,32 +22,40 @@
 	<!-- navbar -->
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="#">OnTime</a>
-			<p class="navbar-text navbar-right">Signed in as
-				<a href="#" class="navbar-link">Sign In</a>
-			</p>
+			<ul class="nav navbar-nav navbar-right">
+				<li>
+					<div id="firebaseui-auth-container"></div>
+				</li>
+				<li>
+					<div id="sign-in"></div>
+				</li>
+				<li>
+					<div id="account-details"></div>
+				</li>
+			</ul>
 		</div>
 	</nav>
 	<!-- map -->
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-12">
-	<!-- next appointment -->
+				<!-- next appointment -->
 				<h1>You must commit!!!!</h1>
 				<div id="map"></div>
 			</div>
 		</div>
-	<!-- User input table -->
-		
-	<!-- Appointment Table -->
-		
-	<!-- Calendar -->
-		
+		<!-- User input table -->
+
+		<!-- Appointment Table -->
+
+		<!-- Calendar -->
+
 	</div>
 	<!-- Footer -->
-		
+
 
 	<script src="./assets/javascript/jquery-3.3.1.min.js"></script>
+	<script src="assets/javascript/bootstrap.min.js"></script>
 
 	<script>
 		function initMap() {
