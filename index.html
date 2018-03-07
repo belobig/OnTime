@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
-	<title>Document</title>
+	<title>OnTime</title>
 
 
 	<!-- Linking CSS File -->
@@ -13,28 +14,54 @@
 	<link rel="stylesheet" href="./assets/css/style.css">
 	<!-- Bootstrap -->
 	<link rel="stylesheet" href="./assets/css/bootstrap.css">
-	
-</head>
-<body>
-<h1>You must commit!!!!</h1>
-<div id="map"></div>
-	<script src="./assets/javascript/jquery-3.3.1.min.js"></script>
-	
-    <script>
-      function initMap() {
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 13,
-          center: {lat: 34.04924594193164, lng: -118.24104309082031}
-        });
 
-        var trafficLayer = new google.maps.TrafficLayer();
-        trafficLayer.setMap(map);
-      }
-    </script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlI91WupqEYc4XBk5dBrfcNKekA_e9aZ0&callback=initMap">
-		</script>
+</head>
+
+<body>
+	<!-- navbar -->
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#">OnTime</a>
+			<p class="navbar-text navbar-right">Signed in as
+				<a href="#" class="navbar-link">Sign In</a>
+			</p>
+		</div>
+	</nav>
+	<!-- map -->
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">
+	<!-- next appointment -->
+				<h1>You must commit!!!!</h1>
+				<div id="map"></div>
+			</div>
+		</div>
+	<!-- User input table -->
+		
+	<!-- Appointment Table -->
+		
+	<!-- Calendar -->
+		
+	</div>
+	<!-- Footer -->
+		
+
+	<script src="./assets/javascript/jquery-3.3.1.min.js"></script>
+
+	<script>
+		function initMap() {
+			var map = new google.maps.Map(document.getElementById('map'), {
+				zoom: 13,
+				center: { lat: 34.04924594193164, lng: -118.24104309082031 }
+			});
+
+			var trafficLayer = new google.maps.TrafficLayer();
+			trafficLayer.setMap(map);
+		}
+	</script>
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlI91WupqEYc4XBk5dBrfcNKekA_e9aZ0&callback=initMap">
+	</script>
 
 </body>
-</html>
 
+</html>
