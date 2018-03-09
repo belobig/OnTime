@@ -21,6 +21,6 @@
  	margin: 2px;
  }
 
- #firebaseui-auth-container {
+ #firebaseui-auth-container, .firebaseui-idp-button {
 	max-height: 42px;
  }
