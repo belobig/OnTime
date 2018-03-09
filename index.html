@@ -22,8 +22,7 @@
 
 <body>
 
-	<p>Google Calendar API Quickstart</p>
-<!-- navbar -->
+	<!-- navbar -->
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="#">OnTime</a>
@@ -45,27 +44,59 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-12">
-	<!-- next appointment -->
-				<h1>You must commit!!!!</h1>
-				<div id="map"></div>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title"></h3>
+						<!-- next appointment -->
+						<h1>You must commit!!!!</h1>
+					</div>
+					<div class="panel-body">
+						<div id="map"></div>
+					</div>
+				</div>
 			</div>
-		</div> 
-    <div class="row">
-			<div class="col-sm-12">
-				<pre id="calendar"></pre>
+		</div>
+
+
+		<!-- User input table -->
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Panel title</h3>
 			</div>
-		</div> 
-    
-    
-	<!-- User input table -->
-		
-	<!-- Appointment Table -->
-		
-	<!-- Calendar -->
-		
+			<div class="panel-body">
+				Panel content
+			</div>
+		</div>
+		<!-- Appointment Table -->
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Panel title</h3>
+			</div>
+			<div class="panel-body">
+				Panel content
+				<div class="row">
+					<div class="col-sm-12">
+						<pre id="calendar"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Calendar -->
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Panel title</h3>
+			</div>
+			<div class="panel-body">
+				Panel content
+			</div>
+		</div>
 	</div>
 	<!-- Footer -->
-
+	<div class="panel panel-footer">
+		<div class="panel-body">
+			Panel content
+		</div>
+	</div>
 
 
 	<!-- Adding JQuery -->
@@ -85,7 +116,7 @@
 
 	<!-- script link to google calendar api -->
 	<script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
-	
+
 
 
 
