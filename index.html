@@ -5,7 +5,9 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<script src="https://cdn.firebase.com/libs/firebaseui/2.6.2/firebaseui.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+	<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.6.2/firebaseui.css" />
 	<title>OnTime</title>
 
 
@@ -23,8 +25,8 @@
 <body>
 
 	<!-- navbar -->
-	<nav class="navbar navbar-default">
-		<div class="container-fluid">
+	<nav class="navbar navbar-default fixed72">
+		<div class="container-fluid fixed72">
 			<a class="navbar-brand" href="#">OnTime</a>
 			<ul class="nav navbar-nav navbar-right">
 				<li>
@@ -99,7 +101,12 @@
 	<!-- Adding JQuery -->
 	<script src="./assets/javascript/jquery-3.3.1.min.js"></script>
 
-	<script src="assets/javascript/bootstrap.min.js"></script>
+	<script src="assets/javascript/bs.js"></script>
+	<script>
+			$(document).ready(function () {
+				$('[data-toggle="tooltip"]').tooltip();
+			});
+		</script>
 	<script src="assets/javascript/ontime.js"></script>
 
 

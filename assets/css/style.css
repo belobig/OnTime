@@ -1,5 +1,6 @@
  /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
+
 			 #map {
         height: 400px;
 			}
@@ -49,3 +50,15 @@
 			}
 
 			/* Panel Body */
+
+ /* Make user image 40px x 40px */
+
+ .userImage {
+ 	max-height: 40px;
+ 	max-width: 40px;
+ 	margin: 2px;
+ }
+
+.fixed72 {
+	max-height: 72px;
+
