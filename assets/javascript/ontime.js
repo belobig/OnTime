@@ -1,4 +1,4 @@
-$(document).ready(function () {
+// $(document).ready(function () {
 
 	//Initialize tooltips
 	$('[data-toggle="tooltip"]').tooltip();
@@ -85,5 +85,5 @@ $(document).ready(function () {
 	});
 	
 
-});
+// });
 
