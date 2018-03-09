@@ -2,10 +2,50 @@
        * element that contains the map. */
 			 #map {
         height: 400px;
-      }
+			}
+			
       /* Optional: Makes the sample page fill the window. */
       html, body {
         height: 100%;
         margin: 0;
         padding: 0;
-      }
+			}
+
+			/* background image */
+			body {
+				background: url('../images/eberhard-grossgasteiger-521851-unsplash.jpg')no-repeat center center fixed;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+				
+			}
+
+			/* Navbar Color */
+			.navbar-default {
+				background: rgba(0, 0, 0, 0.664);
+				border: 0px;
+				border-radius: 0;
+			}
+
+			/* Panel Header */
+			.panel-default .panel-heading {
+				background: transparent;
+				border-color: rgba(0, 0, 0, 0.664);
+			}
+
+			/* Border on panels */
+			.panel-default {
+				background: transparent;
+				border: 0px;
+			}
+
+			.panel-footer {
+				background: rgba(0, 0, 0, 0.664);
+				border: 0px;
+				margin-bottom: 0;
+				height: 40px;
+				border-radius: 0;
+			}
+
+			/* Panel Body */
