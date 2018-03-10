@@ -45,7 +45,7 @@ function initMap() {
 		'chst=d_map_pin_letter&chld=O|FFFF00|000000';
 	var map = new google.maps.Map(document.getElementById('map'), {
 		zoom: 13,
-		center: { lat: 40.34937, lng: -111.534000 }
+		center: { lat: 40.569022, lng: -111.893934 }
 
 	});
 
