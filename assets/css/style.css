@@ -14,11 +14,12 @@
 
 			/* background image */
 			body {
-				background: url('../images/eberhard-grossgasteiger-521851-unsplash.jpg')no-repeat center center fixed;
+				background: url('../images/eberhard-grossgasteiger-521851-unsplash.jpg')no-repeat bottom center fixed;
 				-webkit-background-size: cover;
 				-moz-background-size: cover;
 				-o-background-size: cover;
 				background-size: cover;
+				background-color: black;
 				
 			}
 
@@ -61,4 +62,6 @@
 
 .fixed72 {
 	max-height: 72px;
+
+}
 
