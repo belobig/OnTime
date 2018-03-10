@@ -1,4 +1,32 @@
+// Initialize Firebase
+var config = {
+	apiKey: "AIzaSyBotbBY-lxslbb-cQaeMtvpFeZuRQNYyvA",
+	authDomain: "ontime-7e71b.firebaseapp.com",
+	databaseURL: "https://ontime-7e71b.firebaseio.com",
+	projectId: "ontime-7e71b",
+	storageBucket: "ontime-7e71b.appspot.com",
+	messagingSenderId: "680626336941"
+};
+firebase.initializeApp(config);
 
+var database = firebase.database();
+
+
+// FirebaseUI config.
+var uiConfig = {
+	signInSuccessUrl: 'index.html',
+	signInOptions: [
+		// Leave the lines as is for the providers you want to offer your users.
+		firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+	],
+	// Terms of service url.
+	tosUrl: '<your-tos-url>'
+};
+
+// Initialize the FirebaseUI Widget using Firebase.
+var ui = new firebaseui.auth.AuthUI(firebase.auth());
+// The start method will wait until the DOM is loaded.
+ui.start('#firebaseui-auth-container', uiConfig);
 
 ///////----------------------------------------------------------------------------------------------------------------------------------
 // Google Maps API
@@ -52,7 +80,8 @@ function initClient() {
 		clientId: CLIENT_ID,
 		discoveryDocs: DISCOVERY_DOCS,
 		scope: SCOPES
-	}).then(function () {
+	})
+	.then(function () {
 		// Listen for sign-in state changes.
 		gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
 
@@ -60,7 +89,7 @@ function initClient() {
 		updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
 		authorizeButton.onclick = handleAuthClick;
 		signoutButton.onclick = handleSignoutClick;
-	});
+	});//-was inbetween curly and semi
 }
 
 /**
@@ -80,14 +109,14 @@ function updateSigninStatus(isSignedIn) {
 
 /**
  *  Sign in the user upon button click.
- */
+//  */
 function handleAuthClick(event) {
 	gapi.auth2.getAuthInstance().signIn();
 }
 
-/**
- *  Sign out the user upon button click.
- */
+// /**
+//  *  Sign out the user upon button click.
+//  */
 function handleSignoutClick(event) {
 	gapi.auth2.getAuthInstance().signOut();
 }

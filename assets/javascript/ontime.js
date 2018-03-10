@@ -1,7 +1,7 @@
-$(document).ready(function () {
+// $(document).ready(function () {
 
 	//Initialize tooltips
-	$('[data-toggle="tooltip"]').tooltip();
+	// $('[data-toggle="tooltip"]').tooltip();
 
 	// Initialize Firebase
 	var config = {
@@ -85,5 +85,5 @@ $(document).ready(function () {
 	});
 	
 
-});
+// });
 
