@@ -54,7 +54,8 @@
 					<div class="panel-heading">
 						<h3 class="panel-title"></h3>
 						<!-- next appointment -->
-						<h1>You must commit!!!!</h1>
+						<h1>Next Appointment Goes Here</h1>
+						<!-- <h1>You must commit!!!!</h1> -->
 					</div>
 					<div class="panel-body">
 						<div id="map"></div>
@@ -69,24 +70,21 @@
 			<div class="col-sm-12 col-md-12 col-lg-12">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h3 class="panel-title">Panel title</h3>
+						<h3 class="panel-title">Scheduled Events</h3>
 					</div>
 					<div class="panel-body">
-						Panel content
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- Appointment Table -->
-		<div class="row">
-			<div class="col-sm-12 col-md-12 col-lg-12">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">Panel title</h3>
-					</div>
-					<div class="panel-body">
-						Panel content
-						<pre id="calendar"></pre>
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Event Name</th>
+									<th>Location</th>
+									<th>Event Time</th>
+									<th>Travel Time</th>
+								</tr>
+							</thead>
+							<tbody id="all-display">
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>
@@ -96,7 +94,20 @@
 			<div class="col-sm-12 col-md-12 col-lg-12">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h3 class="panel-title">Panel title</h3>
+						<h3 class="panel-title">Calendar</h3>
+					</div>
+					<div class="panel-body">
+						<pre id="calendar"></pre>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Appointment Table -->
+		<div class="row">
+			<div class="col-sm-12 col-md-12 col-lg-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">Appointments</h3>
 					</div>
 					<div class="panel-body">
 						Panel content
@@ -120,6 +131,11 @@
 				$('[data-toggle="tooltip"]').tooltip();
 			});
 		</script>
+
+
+
+
+	<script src="assets/javascript/ontime.js"></script>
 
 	<!-- <script src="assets/javascript/ontime.js"></script> -->
 
