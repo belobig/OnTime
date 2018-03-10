@@ -32,6 +32,17 @@ ui.start('#firebaseui-auth-container', uiConfig);
 // Google Maps API
 ///////----------------------------------------------------------------------------------------------------------------------------------
 function initMap() {
+
+	// var origin1 = new google.maps.LatLng(55.930385, -3.118425);
+	var origin2 = 'Salt Lake City, Utah';
+	var destinationA = 'Boise, Idaho';
+	// var destinationB = new google.maps.LatLng(50.087692, 14.421150);
+
+	var destinationIcon = 'https://chart.googleapis.com/chart?' +
+		'chst=d_map_pin_letter&chld=D|FF0000|000000';
+
+	var originIcon = 'https://chart.googleapis.com/chart?' +
+		'chst=d_map_pin_letter&chld=O|FFFF00|000000';
 	var map = new google.maps.Map(document.getElementById('map'), {
 		zoom: 13,
 		center: { lat: 40.569022, lng: -111.893934 }
@@ -41,16 +52,13 @@ function initMap() {
 	var trafficLayer = new google.maps.TrafficLayer();
 	trafficLayer.setMap(map);
 }
-
+var geocoder = new google.maps.Geocoder;
 
 
 //////
 // Distance calculations
 //////
-// var origin1 = new google.maps.LatLng(55.930385, -3.118425);
-var origin2 = 'Salt Lake City, Utah';
-var destinationA = 'Boise, Idaho';
-// var destinationB = new google.maps.LatLng(50.087692, 14.421150);
+
 
 var service = new google.maps.DistanceMatrixService();
 service.getDistanceMatrix(
@@ -63,6 +71,8 @@ service.getDistanceMatrix(
 			trafficModel: 'pessimistic'
 		},
 		unitSystem: google.maps.UnitSystem.IMPERIAL,
+		avoidHighways: false,
+		avoidTolls: false
 	}, callback);
 
 // blank callback function
@@ -73,6 +83,7 @@ service.getDistanceMatrix(
 
 function callback(response, status) {
 	if (status == 'OK') {
+		console.log(response);
 		var origins = response.originAddresses;
 		var destinations = response.destinationAddresses;
 
@@ -89,7 +100,7 @@ function callback(response, status) {
 	}
 }
 
-callback();
+// callback();
 
 
 ///////----------------------------------------------------------------------------------------------------------------------------------
