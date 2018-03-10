@@ -34,13 +34,13 @@ ui.start('#firebaseui-auth-container', uiConfig);
 function initMap() {
 	var map = new google.maps.Map(document.getElementById('map'), {
 		zoom: 13,
-		center: {lat: 34.04924594193164, lng: -118.24104309082031}
+		center: { lat: 40.34937, lng: -111.534000 }
 	});
 
 	var trafficLayer = new google.maps.TrafficLayer();
 	trafficLayer.setMap(map);
 }
-{/* <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlI91WupqEYc4XBk5dBrfcNKekA_e9aZ0&callback=initMap"></script> */}
+{/* <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlI91WupqEYc4XBk5dBrfcNKekA_e9aZ0&callback=initMap"></script> */ }
 
 
 
@@ -81,15 +81,15 @@ function initClient() {
 		discoveryDocs: DISCOVERY_DOCS,
 		scope: SCOPES
 	})
-	.then(function () {
-		// Listen for sign-in state changes.
-		gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+		.then(function () {
+			// Listen for sign-in state changes.
+			gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
 
-		// Handle the initial sign-in state.
-		updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
-		authorizeButton.onclick = handleAuthClick;
-		signoutButton.onclick = handleSignoutClick;
-	});//-was inbetween curly and semi
+			// Handle the initial sign-in state.
+			updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+			authorizeButton.onclick = handleAuthClick;
+			signoutButton.onclick = handleSignoutClick;
+		});//-was inbetween curly and semi
 }
 
 /**
@@ -98,12 +98,44 @@ function initClient() {
  */
 function updateSigninStatus(isSignedIn) {
 	if (isSignedIn) {
-		authorizeButton.style.display = 'none';
-		signoutButton.style.display = 'block';
+		// authorizeButton.style.display = 'none';
+		// signoutButton.style.display = 'block';
+
+		// from ontime.js-------------------------------------------
+		var displayName = user.displayName;
+		var email = user.email;
+		var emailVerified = user.emailVerified;
+		var photoURL = user.photoURL;
+		var uid = user.uid;
+		var phoneNumber = user.phoneNumber;
+		var providerData = user.providerData;
+		user.getIdToken().then(function (accessToken) {
+			$("#firebaseui-auth-container").hide();
+			document.getElementById('account-details').innerHTML = '<img class="userImage img-circle" src="' + photoURL + '" alt="User Image">' + displayName;
+			$("#signOutBtn").on("click", function () {
+				firebase.auth().signOut().then(function () {
+					console.log('Signed Out');
+				}, function (error) {
+					console.error('Sign Out Error', error);
+				});
+			});
+		});
+
+		console.log("User is Signed IN!");
+		// --------------------------------------------------------------
 		listUpcomingEvents();
 	} else {
-		authorizeButton.style.display = 'block';
-		signoutButton.style.display = 'none';
+		// authorizeButton.style.display = 'block';
+		// signoutButton.style.display = 'none';
+
+		// From ontime.js -------------------------------------------
+		// User is signed out.
+		document.getElementById('account-details').innerHTML = '';
+		document.getElementById('sign-in').innerHTML = '';
+		$("#firebaseui-auth-container").show();
+		// $("#mainArea").html('');
+		console.log("User is signed out");
+		//-------------------------------------------------------------
 	}
 }
 
@@ -146,7 +178,7 @@ function listUpcomingEvents() {
 		'singleEvents': true,
 		'maxResults': 10,
 		'orderBy': 'startTime'
-	}).then(function(response) {
+	}).then(function (response) {
 		var events = response.result.items;
 		appendPre('Upcoming events:');
 
