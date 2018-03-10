@@ -143,7 +143,7 @@ firebase.auth().onAuthStateChanged(function (user) {
 		console.log("User is signed out");
 		//-------------------------------------------------------------
 	}
-}
+});
 
 /**
  *  Sign in the user upon button click.
