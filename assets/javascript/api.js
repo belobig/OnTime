@@ -96,8 +96,13 @@ function initClient() {
  *  Called when the signed in status changes, to update the UI
  *  appropriately. After a sign-in, the API is called.
  */
-function updateSigninStatus(isSignedIn) {
-	if (isSignedIn) {
+// function updateSigninStatus(isSignedIn) {
+// 	if (isSignedIn) {
+
+// from ontime.js -----------------------------
+firebase.auth().onAuthStateChanged(function (user) {
+	if (user) {
+		// -----------------------------------------
 		// authorizeButton.style.display = 'none';
 		// signoutButton.style.display = 'block';
 
@@ -133,7 +138,6 @@ function updateSigninStatus(isSignedIn) {
 		document.getElementById('account-details').innerHTML = '';
 		document.getElementById('sign-in').innerHTML = '';
 		$("#firebaseui-auth-container").show();
-		// $("#mainArea").html('');
 		console.log("User is signed out");
 		//-------------------------------------------------------------
 	}
