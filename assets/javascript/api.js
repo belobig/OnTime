@@ -81,6 +81,7 @@ function initClient() {
 		discoveryDocs: DISCOVERY_DOCS,
 		scope: SCOPES
 	})
+
 		.then(function () {
 			// Listen for sign-in state changes.
 			gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
@@ -90,6 +91,7 @@ function initClient() {
 			authorizeButton.onclick = handleAuthClick;
 			signoutButton.onclick = handleSignoutClick;
 		});//-was inbetween curly and semi
+
 }
 
 /**
