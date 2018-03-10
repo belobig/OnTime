@@ -20,7 +20,7 @@
 				-o-background-size: cover;
 				background-size: cover;
 				background-color: black;
-				
+				color: rgba(255, 255, 255, 0.699);
 			}
 
 			/* Navbar Color */
@@ -39,9 +39,21 @@
 			/* Border on panels */
 			.panel-default {
 				background: transparent;
+				/* background: rgba(0, 0, 0, 0.219); */
 				border: 0px;
 			}
+			
+			/* Panel Title Font */
+			.panel-title {
+				color: rgba(255, 255, 255, 0.699);
+			}
 
+			/* table border */
+			.table thead tr th {
+				border-bottom: 1px solid rgba(0, 0, 0, 0.664);
+			}
+
+			/* footer */
 			.panel-footer {
 				background: rgba(0, 0, 0, 0.664);
 				border: 0px;
