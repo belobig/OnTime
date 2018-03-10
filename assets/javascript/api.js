@@ -6,15 +6,60 @@
 function initMap() {
 	var map = new google.maps.Map(document.getElementById('map'), {
 		zoom: 13,
-		center: {lat: 34.04924594193164, lng: -118.24104309082031}
+		center: { lat: 34.04924594193164, lng: -118.24104309082031 }
 	});
 
 	var trafficLayer = new google.maps.TrafficLayer();
 	trafficLayer.setMap(map);
 }
-{/* <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlI91WupqEYc4XBk5dBrfcNKekA_e9aZ0&callback=initMap"></script> */}
 
 
+//////
+// Distance calculations
+//////
+// var origin1 = new google.maps.LatLng(55.930385, -3.118425);
+var origin2 = 'Salt Lake City, Utah';
+var destinationA = 'Boise, Idaho';
+// var destinationB = new google.maps.LatLng(50.087692, 14.421150);
+
+var service = new google.maps.DistanceMatrixService();
+service.getDistanceMatrix(
+	{
+		origins: [origin2],
+		destinations: [destinationA],
+		travelMode: 'DRIVING',
+		drivingOptions: {
+			departureTime: new Date(Date.now() + N), //leaveing now-ish
+			trafficModel: 'pessimistic'
+		},
+		unitSystem: google.maps.UnitSystem.IMPERIAL,
+	}, callback);
+
+// blank callback function
+// function callback(response, status) {
+//	// See Parsing the Results for
+//	// the basics of a callback function.
+//}
+
+function callback(response, status) {
+	if (status == 'OK') {
+		var origins = response.originAddresses;
+		var destinations = response.destinationAddresses;
+
+		for (var i = 0; i < origins.length; i++) {
+			var results = response.rows[i].elements;
+			for (var j = 0; j < results.length; j++) {
+				var element = results[j];
+				var distance = element.distance.text;
+				var duration = element.duration.text;
+				var from = origins[i];
+				var to = destinations[j];
+			}
+		}
+	}
+}
+
+callback();
 
 
 ///////----------------------------------------------------------------------------------------------------------------------------------
@@ -52,8 +97,7 @@ function initClient() {
 		clientId: CLIENT_ID,
 		discoveryDocs: DISCOVERY_DOCS,
 		scope: SCOPES
-	})
-	.then(function () {
+	}).then(function () {
 		// Listen for sign-in state changes.
 		gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
 
@@ -118,7 +162,7 @@ function listUpcomingEvents() {
 		'singleEvents': true,
 		'maxResults': 10,
 		'orderBy': 'startTime'
-	}).then(function(response) {
+	}).then(function (response) {
 		var events = response.result.items;
 		appendPre('Upcoming events:');
 
