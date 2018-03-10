@@ -1,68 +1,76 @@
  /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
 
-			 #map {
-        height: 400px;
-			}
-			
-      /* Optional: Makes the sample page fill the window. */
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-			}
+ #map {
+ 	height: 400px;
+ }
 
-			/* background image */
-			body {
-				background: url('../images/eberhard-grossgasteiger-521851-unsplash.jpg')no-repeat bottom center fixed;
-				-webkit-background-size: cover;
-				-moz-background-size: cover;
-				-o-background-size: cover;
-				background-size: cover;
-				background-color: black;
-				color: rgba(255, 255, 255, 0.699);
-			}
+ /* Optional: Makes the sample page fill the window. */
 
-			/* Navbar Color */
-			.navbar-default {
-				background: rgba(0, 0, 0, 0.664);
-				border: 0px;
-				border-radius: 0;
-			}
+ html, body {
+ 	height: 100%;
+ 	margin: 0;
+ 	padding: 0;
+ }
 
-			/* Panel Header */
-			.panel-default .panel-heading {
-				background: transparent;
-				border-color: rgba(0, 0, 0, 0.664);
-			}
+ /* background image */
 
-			/* Border on panels */
-			.panel-default {
-				background: transparent;
-				/* background: rgba(0, 0, 0, 0.219); */
-				border: 0px;
-			}
-			
-			/* Panel Title Font */
-			.panel-title {
-				color: rgba(255, 255, 255, 0.699);
-			}
+ body {
+ 	background: url('../images/eberhard-grossgasteiger-521851-unsplash.jpg')no-repeat bottom center fixed;
+ 	-webkit-background-size: cover;
+ 	-moz-background-size: cover;
+ 	-o-background-size: cover;
+ 	background-size: cover;
+ 	background-color: black;
+ 	color: rgba(255, 255, 255, 0.699);
+ }
 
-			/* table border */
-			.table thead tr th {
-				border-bottom: 1px solid rgba(0, 0, 0, 0.664);
-			}
+ /* Navbar Color */
 
-			/* footer */
-			.panel-footer {
-				background: rgba(0, 0, 0, 0.664);
-				border: 0px;
-				margin-bottom: 0;
-				height: 40px;
-				border-radius: 0;
-			}
+ .navbar-default {
+ 	background: rgba(0, 0, 0, 0.664);
+ 	border: 0px;
+ 	border-radius: 0;
+ }
 
-			/* Panel Body */
+ /* Panel Header */
+
+ .panel-default .panel-heading {
+ 	background: transparent;
+ 	border-color: rgba(0, 0, 0, 0.664);
+ }
+
+ /* Border on panels */
+
+ .panel-default {
+ 	background: transparent;
+ 	/* background: rgba(0, 0, 0, 0.219); */
+ 	border: 0px;
+ }
+
+ /* Panel Title Font */
+
+ .panel-title {
+ 	color: rgba(255, 255, 255, 0.699);
+ }
+
+ /* table border */
+
+ .table thead tr th {
+ 	border-bottom: 1px solid rgba(0, 0, 0, 0.664);
+ }
+
+ /* footer */
+
+ .panel-footer {
+ 	background: rgba(0, 0, 0, 0.664);
+ 	border: 0px;
+ 	margin-bottom: 0;
+ 	height: 40px;
+ 	border-radius: 0;
+ }
+
+ /* Panel Body */
 
  /* Make user image 40px x 40px */
 
@@ -72,8 +80,6 @@
  	margin: 2px;
  }
 
-.fixed72 {
-	max-height: 72px;
-
-}
-
+ .fixed72 {
+ 	max-height: 72px;
+ }
