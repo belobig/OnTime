@@ -34,7 +34,7 @@ ui.start('#firebaseui-auth-container', uiConfig);
 function initMap() {
 	var map = new google.maps.Map(document.getElementById('map'), {
 		zoom: 13,
-		center: { lat: 40.34937, lng: -111.534000 }
+		center: { lat: 40.569022, lng: -111.893934 }
 
 	});
 
