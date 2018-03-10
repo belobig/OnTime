@@ -7,6 +7,7 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<script src="https://cdn.firebase.com/libs/firebaseui/2.6.2/firebaseui.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+	<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.6.2/firebaseui.css" />
 	<title>OnTime</title>
 
 
@@ -24,8 +25,8 @@
 <body>
 
 	<!-- navbar -->
-	<nav class="navbar navbar-default">
-		<div class="container-fluid">
+	<nav class="navbar navbar-default fixed72">
+		<div class="container-fluid fixed72">
 			<a class="navbar-brand" href="#">OnTime</a>
 			<ul class="nav navbar-nav navbar-right">
 				<li>
@@ -48,7 +49,7 @@
 	<!-- map -->
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-12">
+			<div class="col-sm-12 col-md-12 col-lg-12">
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h3 class="panel-title"></h3>
@@ -64,44 +65,49 @@
 
 
 		<!-- User input table -->
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3 class="panel-title">Panel title</h3>
-			</div>
-			<div class="panel-body">
-				Panel content
+		<div class="row">
+			<div class="col-sm-12 col-md-12 col-lg-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">Panel title</h3>
+					</div>
+					<div class="panel-body">
+						Panel content
+					</div>
+				</div>
 			</div>
 		</div>
 		<!-- Appointment Table -->
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3 class="panel-title">Panel title</h3>
-			</div>
-			<div class="panel-body">
-				Panel content
-				<div class="row">
-					<div class="col-sm-12">
+		<div class="row">
+			<div class="col-sm-12 col-md-12 col-lg-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">Panel title</h3>
+					</div>
+					<div class="panel-body">
+						Panel content
 						<pre id="calendar"></pre>
 					</div>
 				</div>
 			</div>
 		</div>
 		<!-- Calendar -->
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3 class="panel-title">Panel title</h3>
-			</div>
-			<div class="panel-body">
-				Panel content
+		<div class="row">
+			<div class="col-sm-12 col-md-12 col-lg-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">Panel title</h3>
+					</div>
+					<div class="panel-body">
+						Panel content
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
 	<!-- Footer -->
-	<div class="panel panel-footer">
-		<div class="panel-body">
-			Panel content
-		</div>
-	</div>
+	<footer class="panel panel-footer">
+	</footer>
 
 
 	<!-- Adding JQuery -->
@@ -109,11 +115,14 @@
 
 	<script src="assets/javascript/bs.js"></script>
 	<script>
-		$(document).ready(function () {
-			$('[data-toggle="tooltip"]').tooltip();
-		});
-	</script>
+
+			$(document).ready(function () {
+				$('[data-toggle="tooltip"]').tooltip();
+			});
+		</script>
+
 	<!-- <script src="assets/javascript/ontime.js"></script> -->
+
 
 
 	<!-- Adding link to API via api.js -->
