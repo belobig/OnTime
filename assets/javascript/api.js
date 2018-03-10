@@ -1,4 +1,32 @@
+// Initialize Firebase
+var config = {
+	apiKey: "AIzaSyBotbBY-lxslbb-cQaeMtvpFeZuRQNYyvA",
+	authDomain: "ontime-7e71b.firebaseapp.com",
+	databaseURL: "https://ontime-7e71b.firebaseio.com",
+	projectId: "ontime-7e71b",
+	storageBucket: "ontime-7e71b.appspot.com",
+	messagingSenderId: "680626336941"
+};
+firebase.initializeApp(config);
 
+var database = firebase.database();
+
+
+// FirebaseUI config.
+var uiConfig = {
+	signInSuccessUrl: 'index.html',
+	signInOptions: [
+		// Leave the lines as is for the providers you want to offer your users.
+		firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+	],
+	// Terms of service url.
+	tosUrl: '<your-tos-url>'
+};
+
+// Initialize the FirebaseUI Widget using Firebase.
+var ui = new firebaseui.auth.AuthUI(firebase.auth());
+// The start method will wait until the DOM is loaded.
+ui.start('#firebaseui-auth-container', uiConfig);
 
 ///////----------------------------------------------------------------------------------------------------------------------------------
 // Google Maps API
@@ -17,13 +45,15 @@ function initMap() {
 		'chst=d_map_pin_letter&chld=O|FFFF00|000000';
 	var map = new google.maps.Map(document.getElementById('map'), {
 		zoom: 13,
-		center: { lat: 34.04924594193164, lng: -118.24104309082031 }
+		center: { lat: 40.34937, lng: -111.534000 }
+
 	});
 
 	var trafficLayer = new google.maps.TrafficLayer();
 	trafficLayer.setMap(map);
 }
 var geocoder = new google.maps.Geocoder;
+
 
 //////
 // Distance calculations
@@ -109,30 +139,66 @@ function initClient() {
 		discoveryDocs: DISCOVERY_DOCS,
 		scope: SCOPES
 	}).then(function () {
-		// Listen for sign-in state changes.
-		gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+			// Listen for sign-in state changes.
+			gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
 
-		// Handle the initial sign-in state.
-		updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
-		authorizeButton.onclick = handleAuthClick;
-		signoutButton.onclick = handleSignoutClick;
-	});//-was inbetween curly and semi
+			// Handle the initial sign-in state.
+			updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+			authorizeButton.onclick = handleAuthClick;
+			signoutButton.onclick = handleSignoutClick;
+		});//-was inbetween curly and semi
 }
 
 /**
  *  Called when the signed in status changes, to update the UI
  *  appropriately. After a sign-in, the API is called.
  */
-function updateSigninStatus(isSignedIn) {
-	if (isSignedIn) {
-		authorizeButton.style.display = 'none';
-		signoutButton.style.display = 'block';
+// function updateSigninStatus(isSignedIn) {
+// 	if (isSignedIn) {
+
+// from ontime.js -----------------------------
+firebase.auth().onAuthStateChanged(function (user) {
+	if (user) {
+		// -----------------------------------------
+		// authorizeButton.style.display = 'none';
+		// signoutButton.style.display = 'block';
+
+		// from ontime.js-------------------------------------------
+		var displayName = user.displayName;
+		var email = user.email;
+		var emailVerified = user.emailVerified;
+		var photoURL = user.photoURL;
+		var uid = user.uid;
+		var phoneNumber = user.phoneNumber;
+		var providerData = user.providerData;
+		user.getIdToken().then(function (accessToken) {
+			$("#firebaseui-auth-container").hide();
+			document.getElementById('account-details').innerHTML = '<img class="userImage img-circle" src="' + photoURL + '" alt="User Image">' + displayName;
+			$("#signOutBtn").on("click", function () {
+				firebase.auth().signOut().then(function () {
+					console.log('Signed Out');
+				}, function (error) {
+					console.error('Sign Out Error', error);
+				});
+			});
+		});
+
+		console.log("User is Signed IN!");
+		// --------------------------------------------------------------
 		listUpcomingEvents();
 	} else {
-		authorizeButton.style.display = 'block';
-		signoutButton.style.display = 'none';
+		// authorizeButton.style.display = 'block';
+		// signoutButton.style.display = 'none';
+
+		// From ontime.js -------------------------------------------
+		// User is signed out.
+		document.getElementById('account-details').innerHTML = '';
+		document.getElementById('sign-in').innerHTML = '';
+		$("#firebaseui-auth-container").show();
+		console.log("User is signed out");
+		//-------------------------------------------------------------
 	}
-}
+});
 
 /**
  *  Sign in the user upon button click.
