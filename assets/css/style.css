@@ -83,8 +83,20 @@
  .fixed72 {
  	max-height: 72px;
  }
- 
+
  #firebaseui-auth-container {
-	 max-width: 100px;
+	 max-width: 150px;
 	 float: right!important;
+ }
+
+ #sign-in {
+	float: right!important;
+ }
+
+ .firebaseui-card-content {
+	 padding: 0!important;
+ }
+
+ .firebaseui-idp-list {
+	 margin: 5px 0!important;
  }
