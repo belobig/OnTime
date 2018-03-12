@@ -83,3 +83,8 @@
  .fixed72 {
  	max-height: 72px;
  }
+ 
+ #firebaseui-auth-container {
+	 max-width: 100px;
+	 float: right!important;
+ }
