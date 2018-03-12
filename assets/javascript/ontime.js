@@ -53,7 +53,7 @@ initApp = function () {
 			var providerData = user.providerData;
 			user.getIdToken().then(function (accessToken) {
 				$("#firebaseui-auth-container").hide();
-				document.getElementById('sign-in').innerHTML = signOutBtn;
+				// document.getElementById('sign-in').innerHTML = signOutBtn;
 				document.getElementById('account-details').innerHTML = '<img class="userImage img-circle" src="' + photoURL + '" alt="User Image">' + displayName;
 				$("#signOutBtn").on("click", function () {
 					firebase.auth().signOut().then(function () {

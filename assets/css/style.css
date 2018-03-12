@@ -93,6 +93,10 @@
 	float: right!important;
  }
 
+ #account-details {
+	float: right!important;
+ }
+
  .firebaseui-card-content {
 	 padding: 0!important;
  }
