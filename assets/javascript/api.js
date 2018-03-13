@@ -154,6 +154,8 @@ database.ref().on("child_added", function (snapshot) {
 
 	// key = snapshot.e.key;
 	console.log(snapshot);// This is how I figured out how to get the key
+	console.log(snapshot.key);
+	console.log(snapshot.ge.key);
 
 	$("#all-display").append("<tr><td>" + tdEventName + "</td><td>" + tdDest + "</td><td>" + tdOrig + "</td><td>" + key + "</td></tr>");
 	
