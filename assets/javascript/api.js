@@ -115,7 +115,7 @@ function initMap() {
 	// var oceanBeach = new google.maps.LatLng(37.7683909618184, -122.51089453697205);
 	var myOrigin = tdOrig;
 	var myDestination = tdDest;
-	console.log(tdOrig, tdDest);
+	// console.log(tdOrig, tdDest);
 	var saltLake = new google.maps.LatLng(40.569022, -111.893934);
 	var mapOptions = {
 		zoom: 14,
@@ -146,8 +146,8 @@ function calcRoute(myOrigin, myDestination, directionsService, directionsDisplay
 		}
 	};
 	directionsService.route(request, function (response, status) {
-		console.log(response);
-		console.log(response.routes[0].legs[0].duration_in_traffic);
+		// console.log(response);
+		// console.log(response.routes[0].legs[0].duration_in_traffic);
 		if (status == 'OK') {
 			directionsDisplay.setDirections(response);
 			updateTravelTime(response);
@@ -164,7 +164,7 @@ database.ref().on("child_added", function (snapshot) {
 
 	key = snapshot.key;
 	// console.log(snapshot);
-	console.log(key);
+	// console.log(key);
 	tTimeID = 'tTime' + key;
 
 	$("#all-display").append("<tr><td>" + tdEventName + "</td><td>" + tdDest + "</td><td>" + tdOrig + "</td><td id=" + "'" + tTimeID + "'" + ">loading...</td></tr>");
@@ -179,7 +179,7 @@ function updateTravelTime(response) {
 			travelTime = response.routes[0].legs[0].duration_in_traffic.text;
 			var updtKey = childSnapshot.key;
 			var updtTtimeID = 'tTime' + updtKey;
-			
+			console.log(travelTime);
 			$("#" + updtTtimeID + "").html(travelTime);
 		});
 
