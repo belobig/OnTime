@@ -80,6 +80,10 @@
 
 var orig;
 var dest;
+var tdEventName;
+var tdOrig;
+var tdDest;
+var key;
 
 // Get info from input fields, and push them to firebase
 $("#submitInfo").on("click", function (event) {
@@ -123,11 +127,11 @@ function initMap() {
 	});
 }
 
-function calcRoute(myOrigin, myDestination, directionsService, directionsDisplay) {
+function calcRoute(tdOrig, tdDest, directionsService, directionsDisplay) {
 	var selectedMode = document.getElementById('mode').value;
 	var request = {
-		origin: myOrigin,
-		destination: myDestination,
+		origin: tdOrig,
+		destination: tdDest,
 		// Note that Javascript allows us to access the constant
 		// using square brackets and a string value as its
 		// "property."
@@ -140,6 +144,20 @@ function calcRoute(myOrigin, myDestination, directionsService, directionsDisplay
 		}
 	});
 }
+
+// Each time a child, or trip, is added to the database, add it to the DOM and map
+database.ref().on("child_added", function (snapshot) {
+	//console.log("I had a child!");
+	tdEventName = snapshot.val().dateAdded;
+	tdOrig = snapshot.val().name;
+	tdDest = snapshot.val().dest;
+
+	key = snapshot.Ce.key;
+	//console.log(snapshot.Ce.key);// This is how I figured out how to get the key
+
+	$("#all-display").append("<tr><td>" + tdEventName + "</td><td>" + tdDest + "</td><td>" + tdOrig + "</td><td>" + key + "</td></tr>");
+	
+});
 
 // function callback(response, status) {
 // 	if (status == 'OK') {
