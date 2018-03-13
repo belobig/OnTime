@@ -104,3 +104,11 @@
  .firebaseui-idp-list {
 	 margin: 5px 0!important;
  }
+
+ #mode {
+	 background: black;
+ }
+
+ #directionsPanel {
+	background: rgba(255, 255, 255, 0.699);
+}

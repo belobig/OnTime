@@ -59,6 +59,17 @@
 					</div>
 					<div class="panel-body">
 						<div id="map"></div>
+						<div>
+							<strong>Mode of Travel: </strong>
+							<select id="mode" onchange="calcRoute();">
+								<option value="DRIVING">Driving</option>
+								<option value="WALKING">Walking</option>
+								<option value="BICYCLING">Bicycling</option>
+								<option value="TRANSIT">Transit</option>
+							</select>
+						</div>
+						<!-- We can format this better, maybe make it a dropdown so it doesn't take up so much space unless the user wants to see the details -->
+						<div id="directionsPanel" style="float:right;width:30%;height: 100%"></div>
 					</div>
 				</div>
 			</div>
@@ -127,10 +138,10 @@
 	<script src="assets/javascript/bs.js"></script>
 	<script>
 
-			$(document).ready(function () {
-				$('[data-toggle="tooltip"]').tooltip();
-			});
-		</script>
+		$(document).ready(function () {
+			$('[data-toggle="tooltip"]').tooltip();
+		});
+	</script>
 
 	<script src="assets/javascript/ontime.js"></script>
 
