@@ -113,6 +113,7 @@ function initMap(tdOrig, tdDest) {
 	// var oceanBeach = new google.maps.LatLng(37.7683909618184, -122.51089453697205);
 	var myOrigin = tdOrig;
 	var myDestination = tdDest;
+	console.log(tdOrig, tdDest);
 	var saltLake = new google.maps.LatLng(40.569022, -111.893934);
 	var mapOptions = {
 		zoom: 14,
@@ -153,9 +154,9 @@ database.ref().on("child_added", function (snapshot) {
 	tdDest = snapshot.val().dest;
 
 	key = snapshot.key;
-	console.log(snapshot);// This is how I figured out how to get the key
-	console.log(snapshot.key);
-	console.log(snapshot.ge.key);
+	// console.log(snapshot);
+	console.log(key);
+	// console.log(snapshot.ge.key);// This is how I figured out how to get the key
 
 	$("#all-display").append("<tr><td>" + tdEventName + "</td><td>" + tdDest + "</td><td>" + tdOrig + "</td><td>" + key + "</td></tr>");
 	
