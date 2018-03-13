@@ -150,7 +150,7 @@ function calcRoute(myOrigin, myDestination, directionsService, directionsDisplay
 		// console.log(response.routes[0].legs[0].duration_in_traffic);
 		if (status == 'OK') {
 			directionsDisplay.setDirections(response);
-			updateTravelTime(response);
+			// updateTravelTime(response); // Calling it here causes it to repeat once for each database entry
 		}
 	});
 }
@@ -186,6 +186,8 @@ function updateTravelTime(response) {
 	});
 
 }
+
+setTimeout(updateTravelTime, 2000);
 
 // function callback(response, status) {
 // 	if (status == 'OK') {
