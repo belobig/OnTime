@@ -137,7 +137,11 @@ function calcRoute(myOrigin, myDestination, directionsService, directionsDisplay
 		// Note that Javascript allows us to access the constant
 		// using square brackets and a string value as its
 		// "property."
-		travelMode: google.maps.TravelMode[selectedMode]
+		travelMode: google.maps.TravelMode[selectedMode],
+		drivingOptions: {
+			departureTime: new Date(Date.now()),  // for the time N milliseconds from now.
+			trafficModel: 'optimistic'
+		}
 	};
 	directionsService.route(request, function (response, status) {
 		console.log(response);
