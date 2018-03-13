@@ -86,6 +86,7 @@ var tdDest = 'Boise, ID';
 var key;
 var travelTime;
 var tTimeID;
+var directions;
 
 // Get info from input fields, and push them to firebase
 $("#submitInfo").on("click", function (event) {
@@ -151,7 +152,7 @@ function calcRoute(myOrigin, myDestination, directionsService, directionsDisplay
 		if (status == 'OK') {
 			directionsDisplay.setDirections(response);
 			// updateTravelTime(response); // Calling it here causes it to repeat once for each database entry
-			return response;
+			directions = response;
 		}
 	});
 }
@@ -174,10 +175,10 @@ database.ref().on("child_added", function (snapshot) {
 });
 
 // To update travel time
-function updateTravelTime(response) {
+function updateTravelTime() {
 	database.ref().once("value", function (snapshot) {
 		snapshot.forEach(function (childSnapshot) {
-			travelTime = response.routes[0].legs[0].duration_in_traffic.text;
+			travelTime = directions.routes[0].legs[0].duration_in_traffic.text;
 			var updtKey = childSnapshot.key;
 			var updtTtimeID = 'tTime' + updtKey;
 			console.log(travelTime);
