@@ -178,10 +178,8 @@ function updateTravelTime(response) {
 		snapshot.forEach(function (childSnapshot) {
 			travelTime = response.routes[0].legs[0].duration_in_traffic.text;
 			var updtKey = childSnapshot.key;
-			var updtTtimeID = 'mins' + updtKey;
+			var updtTtimeID = 'tTime' + updtKey;
 			
-
-			// console.log(parseInt($("#" + updtMinsID + "").html()));
 			$("#" + updtTtimeID + "").html(travelTime);
 		});
 
