@@ -86,7 +86,7 @@ var tdDest = 'Boise, ID';
 var key;
 var travelTime;
 var tTimeID;
-var directions;
+var directions = [];
 
 // Get info from input fields, and push them to firebase
 $("#submitInfo").on("click", function (event) {
@@ -152,7 +152,7 @@ function calcRoute(myOrigin, myDestination, directionsService, directionsDisplay
 		if (status == 'OK') {
 			directionsDisplay.setDirections(response);
 			// updateTravelTime(response); // Calling it here causes it to repeat once for each database entry
-			directions = response;
+			directions.push(response);
 		}
 	});
 }
