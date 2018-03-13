@@ -106,7 +106,7 @@ $("#submitInfo").on("click", function (event) {
 });
 
 // Directions Service API
-function initMap(tdOrig, tdDest) {
+function initMyMap(tdOrig, tdDest) {
 	var directionsService = new google.maps.DirectionsService();
 	var directionsDisplay = new google.maps.DirectionsRenderer();
 	// var haight = new google.maps.LatLng(37.7699298, -122.4469157);
@@ -147,7 +147,7 @@ function calcRoute(myOrigin, myDestination, directionsService, directionsDisplay
 }
 
 // Each time a child, or trip, is added to the database, add it to the DOM and map
-database.ref().once("value", function (snapshot) {
+database.ref().on("child_added", function (snapshot) {
 	//console.log("I had a child!");
 	tdEventName = snapshot.val().dateAdded;
 	tdOrig = snapshot.val().orig;
@@ -160,7 +160,7 @@ database.ref().once("value", function (snapshot) {
 
 	$("#all-display").append("<tr><td>" + tdEventName + "</td><td>" + tdDest + "</td><td>" + tdOrig + "</td><td>" + key + "</td></tr>");
 	
-	initMap(tdOrig, tdDest);
+	initMyMap(tdOrig, tdDest);
 });
 
 // function callback(response, status) {
