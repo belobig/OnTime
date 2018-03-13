@@ -81,8 +81,8 @@
 var orig;
 var dest;
 var tdEventName;
-var tdOrig;
-var tdDest;
+var tdOrig = 'Salt Lake City, UT';
+var tdDest = 'Boise, ID';
 var key;
 
 // Get info from input fields, and push them to firebase
@@ -106,7 +106,7 @@ $("#submitInfo").on("click", function (event) {
 });
 
 // Directions Service API
-function initMyMap(tdOrig, tdDest) {
+function initMap(tdOrig, tdDest) {
 	var directionsService = new google.maps.DirectionsService();
 	var directionsDisplay = new google.maps.DirectionsRenderer();
 	// var haight = new google.maps.LatLng(37.7699298, -122.4469157);
@@ -160,7 +160,7 @@ database.ref().on("child_added", function (snapshot) {
 
 	$("#all-display").append("<tr><td>" + tdEventName + "</td><td>" + tdDest + "</td><td>" + tdOrig + "</td><td>" + key + "</td></tr>");
 	
-	initMyMap(tdOrig, tdDest);
+	initMap(tdOrig, tdDest);
 });
 
 // function callback(response, status) {
