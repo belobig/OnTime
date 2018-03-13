@@ -173,7 +173,7 @@ database.ref().on("child_added", function (snapshot) {
 });
 
 // To update travel time
-function updateTravelTime() {
+function updateTravelTime(response) {
 	database.ref().once("value", function (snapshot) {
 		snapshot.forEach(function (childSnapshot) {
 			travelTime = response.routes[0].legs[0].duration_in_traffic.text;
