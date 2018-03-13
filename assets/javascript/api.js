@@ -145,6 +145,7 @@ function calcRoute(myOrigin, myDestination, directionsService, directionsDisplay
 	};
 	directionsService.route(request, function (response, status) {
 		console.log(response);
+		console.log(response.routes[0].legs[0].duration_in_traffic);
 		if (status == 'OK') {
 			directionsDisplay.setDirections(response);
 		}
