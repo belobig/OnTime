@@ -106,13 +106,13 @@ $("#submitInfo").on("click", function (event) {
 });
 
 // Directions Service API
-function initMap() {
+function initMap(tdOrig, tdDest) {
 	var directionsService = new google.maps.DirectionsService();
 	var directionsDisplay = new google.maps.DirectionsRenderer();
 	// var haight = new google.maps.LatLng(37.7699298, -122.4469157);
 	// var oceanBeach = new google.maps.LatLng(37.7683909618184, -122.51089453697205);
-	var myOrigin = 'Salt Lake City, UT';
-	var myDestination = 'Boise, ID';
+	var myOrigin = tdOrig;
+	var myDestination = tdDest;
 	var saltLake = new google.maps.LatLng(40.569022, -111.893934);
 	var mapOptions = {
 		zoom: 14,
@@ -127,11 +127,11 @@ function initMap() {
 	});
 }
 
-function calcRoute(tdOrig, tdDest, directionsService, directionsDisplay) {
+function calcRoute(myOrigin, myDestination, directionsService, directionsDisplay) {
 	var selectedMode = document.getElementById('mode').value;
 	var request = {
-		origin: tdOrig,
-		destination: tdDest,
+		origin: myOrigin,
+		destination: myDestination,
 		// Note that Javascript allows us to access the constant
 		// using square brackets and a string value as its
 		// "property."
@@ -149,10 +149,10 @@ function calcRoute(tdOrig, tdDest, directionsService, directionsDisplay) {
 database.ref().on("child_added", function (snapshot) {
 	//console.log("I had a child!");
 	tdEventName = snapshot.val().dateAdded;
-	tdOrig = snapshot.val().name;
+	tdOrig = snapshot.val().orig;
 	tdDest = snapshot.val().dest;
 
-	// key = snapshot.e.key;
+	key = snapshot.key;
 	console.log(snapshot);// This is how I figured out how to get the key
 	console.log(snapshot.key);
 	console.log(snapshot.ge.key);
