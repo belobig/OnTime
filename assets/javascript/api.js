@@ -159,6 +159,7 @@ database.ref().on("child_added", function (snapshot) {
 
 	$("#all-display").append("<tr><td>" + tdEventName + "</td><td>" + tdDest + "</td><td>" + tdOrig + "</td><td>" + key + "</td></tr>");
 	
+	initMap(tdOrig, tdDest);
 });
 
 // function callback(response, status) {
