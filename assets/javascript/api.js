@@ -147,7 +147,7 @@ function calcRoute(myOrigin, myDestination, directionsService, directionsDisplay
 }
 
 // Each time a child, or trip, is added to the database, add it to the DOM and map
-database.ref().on("child_added", function (snapshot) {
+database.ref().once("value", function (snapshot) {
 	//console.log("I had a child!");
 	tdEventName = snapshot.val().dateAdded;
 	tdOrig = snapshot.val().orig;
@@ -160,7 +160,7 @@ database.ref().on("child_added", function (snapshot) {
 
 	$("#all-display").append("<tr><td>" + tdEventName + "</td><td>" + tdDest + "</td><td>" + tdOrig + "</td><td>" + key + "</td></tr>");
 	
-	// initMap(tdOrig, tdDest);
+	initMap(tdOrig, tdDest);
 });
 
 // function callback(response, status) {
