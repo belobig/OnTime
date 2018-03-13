@@ -31,76 +31,117 @@
 ///////----------------------------------------------------------------------------------------------------------------------------------
 // Google Maps API
 ///////----------------------------------------------------------------------------------------------------------------------------------
+// function initMap() {
+
+// 	// var origin1 = new google.maps.LatLng(55.930385, -3.118425);
+// 	var origin2 = 'Salt Lake City, Utah';
+// 	var destinationA = 'Boise, Idaho';
+// 	// var destinationB = new google.maps.LatLng(50.087692, 14.421150);
+
+// 	var destinationIcon = 'https://chart.googleapis.com/chart?' +
+// 		'chst=d_map_pin_letter&chld=D|FF0000|000000';
+
+// 	var originIcon = 'https://chart.googleapis.com/chart?' +
+// 		'chst=d_map_pin_letter&chld=O|FFFF00|000000';
+// 	var map = new google.maps.Map(document.getElementById('map'), {
+// 		zoom: 13,
+// 		center: { lat: 40.569022, lng: -111.893934 }
+
+// 	});
+
+// 	var trafficLayer = new google.maps.TrafficLayer();
+// 	trafficLayer.setMap(map);
+
+// 	var geocoder = new google.maps.Geocoder;
+
+
+// //////
+// // Distance calculations
+// //////
+
+
+// var service = new google.maps.DistanceMatrixService();
+// service.getDistanceMatrix(
+// 	{
+// 		origins: [origin2],
+// 		destinations: [destinationA],
+// 		travelMode: 'DRIVING',
+// 		drivingOptions: {
+// 			departureTime: new Date(Date.now()), //leaveing now-ish
+// 			trafficModel: 'pessimistic'
+// 		},
+// 		unitSystem: google.maps.UnitSystem.IMPERIAL,
+// 		avoidHighways: false,
+// 		avoidTolls: false
+// 	}, callback);
+
+// }
+
+// Directions Service API
 function initMap() {
-
-	// var origin1 = new google.maps.LatLng(55.930385, -3.118425);
-	var origin2 = 'Salt Lake City, Utah';
-	var destinationA = 'Boise, Idaho';
-	// var destinationB = new google.maps.LatLng(50.087692, 14.421150);
-
-	var destinationIcon = 'https://chart.googleapis.com/chart?' +
-		'chst=d_map_pin_letter&chld=D|FF0000|000000';
-
-	var originIcon = 'https://chart.googleapis.com/chart?' +
-		'chst=d_map_pin_letter&chld=O|FFFF00|000000';
-	var map = new google.maps.Map(document.getElementById('map'), {
-		zoom: 13,
-		center: { lat: 40.569022, lng: -111.893934 }
-
-	});
-
-	var trafficLayer = new google.maps.TrafficLayer();
-	trafficLayer.setMap(map);
-	
-	var geocoder = new google.maps.Geocoder;
-
-
-//////
-// Distance calculations
-//////
-
-
-var service = new google.maps.DistanceMatrixService();
-service.getDistanceMatrix(
-	{
-		origins: [origin2],
-		destinations: [destinationA],
-		travelMode: 'DRIVING',
-		drivingOptions: {
-			departureTime: new Date(Date.now()), //leaveing now-ish
-			trafficModel: 'pessimistic'
-		},
-		unitSystem: google.maps.UnitSystem.IMPERIAL,
-		avoidHighways: false,
-		avoidTolls: false
-	}, callback);
-
-}
-function callback(response, status) {
-	if (status == 'OK') {
-		// console.log(response);
-		var origins = response.originAddresses;
-		var destinations = response.destinationAddresses;
-		// console.log(response.originAddresses);
-		// console.log(response.destinationAddresses);
-		for (var i = 0; i < origins.length; i++) {
-			var results = response.rows[i].elements;
-			console.log(results);
-			for (var j = 0; j < results.length; j++) {
-				var element = results[j];
-				var distance = element.distance.text;
-				var duration = element.duration.text;
-				var from = origins[i];
-				var to = destinations[j];
-				console.log(element);
-				console.log(distance);
-				console.log(duration);
-				console.log(from);
-				console.log(to);
-			}
-		}
+	var directionsService = new google.maps.DirectionsService();
+	var directionsDisplay = new google.maps.DirectionsRenderer();
+	// var haight = new google.maps.LatLng(37.7699298, -122.4469157);
+	// var oceanBeach = new google.maps.LatLng(37.7683909618184, -122.51089453697205);
+	var myOrigin = 'Salt Lake City, UT';
+	var myDestination = 'Boise, ID';
+	var saltLake = new google.maps.LatLng(40.569022, -111.893934);
+	var mapOptions = {
+		zoom: 14,
+		center: saltLake
 	}
+	var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+	directionsDisplay.setMap(map);
+	directionsDisplay.setPanel(document.getElementById('directionsPanel'));
+	calcRoute(myOrigin, myDestination, directionsService, directionsDisplay);
+	document.getElementById('mode').addEventListener('change', function () {
+		calcRoute(myOrigin, myDestination, directionsService, directionsDisplay);
+	});
 }
+
+function calcRoute(myOrigin, myDestination, directionsService, directionsDisplay) {
+	var selectedMode = document.getElementById('mode').value;
+	var request = {
+		origin: myOrigin,
+		destination: myDestination,
+		// Note that Javascript allows us to access the constant
+		// using square brackets and a string value as its
+		// "property."
+		travelMode: google.maps.TravelMode[selectedMode]
+	};
+	directionsService.route(request, function (response, status) {
+		console.log(response);
+		if (status == 'OK') {
+			directionsDisplay.setDirections(response);
+		}
+	});
+}
+
+// function callback(response, status) {
+// 	if (status == 'OK') {
+// 		// console.log(response);
+// 		var origins = response.originAddresses;
+// 		var destinations = response.destinationAddresses;
+// 		// console.log(response.originAddresses);
+// 		// console.log(response.destinationAddresses);
+// 		for (var i = 0; i < origins.length; i++) {
+// 			var results = response.rows[i].elements;
+// 			console.log(results);
+// 			for (var j = 0; j < results.length; j++) {
+// 				var element = results[j];
+// 				var distance = element.distance.text;
+// 				var duration = element.duration.text;
+// 				var from = origins[i];
+// 				var to = destinations[j];
+// 				console.log(element);
+// 				console.log(distance);
+// 				console.log(duration);
+// 				console.log(from);
+// 				console.log(to);
+// 			}
+// 		}
+// 	}
+// }
 
 // callback();
 
