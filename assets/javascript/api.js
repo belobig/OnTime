@@ -151,6 +151,7 @@ function calcRoute(myOrigin, myDestination, directionsService, directionsDisplay
 		if (status == 'OK') {
 			directionsDisplay.setDirections(response);
 			// updateTravelTime(response); // Calling it here causes it to repeat once for each database entry
+			return response;
 		}
 	});
 }
