@@ -58,18 +58,30 @@
 						<!-- <h1>You must commit!!!!</h1> -->
 					</div>
 					<div class="panel-body">
-						<div id="map"></div>
-						<div>
-							<strong>Mode of Travel: </strong>
-							<select id="mode" onchange="calcRoute();">
+						<div id="floating-panel">
+							<b>Mode of Travel: </b>
+							<select id="mode">
 								<option value="DRIVING">Driving</option>
 								<option value="WALKING">Walking</option>
 								<option value="BICYCLING">Bicycling</option>
 								<option value="TRANSIT">Transit</option>
 							</select>
 						</div>
+						<div id="map"></div>
+						<form>
+								<div class="form-group">
+									<label for="origin">Origin</label>
+									<input type="text" class="form-control" id="origin" placeholder="Salt Lake City, UT">
+								</div>
+								<div class="form-group">
+									<label for="dest">Destination</label>
+									<input type="text" class="form-control" id="dest" placeholder="Boise, ID">
+								</div>
+								<button type="submit" class="btn btn-primary" id="submitInfo">Submit</button>
+							</form>
+
 						<!-- We can format this better, maybe make it a dropdown so it doesn't take up so much space unless the user wants to see the details -->
-						<div id="directionsPanel" style="float:right;width:30%;height: 100%"></div>
+						<div id="directionsPanel" style="float:right;width:100%;height: 100%"></div>
 					</div>
 				</div>
 			</div>
