@@ -77,6 +77,30 @@
 
 // }
 
+
+var orig;
+var dest;
+
+// Get info from input fields, and push them to firebase
+$("#submitInfo").on("click", function (event) {
+	// Prevent form from reloading the page on Submit
+	// event.preventDefault();
+
+	// Get the input values
+	orig = $("#origin").val().trim();
+	dest = $("#dest").val().trim();
+
+
+	// Save the new data in Firebase
+	database.ref().push({
+		orig: orig,
+		dest: dest,
+		dateAdded: firebase.database.ServerValue.TIMESTAMP
+	});
+
+
+});
+
 // Directions Service API
 function initMap() {
 	var directionsService = new google.maps.DirectionsService();
