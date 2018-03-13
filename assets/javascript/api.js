@@ -106,7 +106,7 @@ $("#submitInfo").on("click", function (event) {
 });
 
 // Directions Service API
-function initMap(tdOrig, tdDest) {
+function initMap() {
 	var directionsService = new google.maps.DirectionsService();
 	var directionsDisplay = new google.maps.DirectionsRenderer();
 	// var haight = new google.maps.LatLng(37.7699298, -122.4469157);
