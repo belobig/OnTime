@@ -121,6 +121,7 @@ function initMap(tdOrig, tdDest) {
 	}
 	var map = new google.maps.Map(document.getElementById('map'), mapOptions);
 	directionsDisplay.setMap(map);
+	$("#directionsPanel").html('');
 	directionsDisplay.setPanel(document.getElementById('directionsPanel'));
 	calcRoute(myOrigin, myDestination, directionsService, directionsDisplay);
 	document.getElementById('mode').addEventListener('change', function () {
