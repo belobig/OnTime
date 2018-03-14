@@ -1,42 +1,12 @@
-// // Initialize Firebase
-// var config = {
-// 	apiKey: "AIzaSyBotbBY-lxslbb-cQaeMtvpFeZuRQNYyvA",
-// 	authDomain: "ontime-7e71b.firebaseapp.com",
-// 	databaseURL: "https://ontime-7e71b.firebaseio.com",
-// 	projectId: "ontime-7e71b",
-// 	storageBucket: "ontime-7e71b.appspot.com",
-// 	messagingSenderId: "680626336941"
-// };
-// firebase.initializeApp(config);
-
-// var database = firebase.database();
-
-
-// // FirebaseUI config.
-// var uiConfig = {
-// 	signInSuccessUrl: 'index.html',
-// 	signInOptions: [
-// 		// Leave the lines as is for the providers you want to offer your users.
-// 		firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-// 	],
-// 	// Terms of service url.
-// 	tosUrl: '<your-tos-url>'
-// };
-
-// // Initialize the FirebaseUI Widget using Firebase.
-// var ui = new firebaseui.auth.AuthUI(firebase.auth());
-// // The start method will wait until the DOM is loaded.
-// ui.start('#firebaseui-auth-container', uiConfig);
 
 ///////----------------------------------------------------------------------------------------------------------------------------------
 // Google Maps API
 ///////----------------------------------------------------------------------------------------------------------------------------------
 // function initMap() {
 
-// 	// var origin1 = new google.maps.LatLng(55.930385, -3.118425);
+
 // 	var origin2 = 'Salt Lake City, Utah';
 // 	var destinationA = 'Boise, Idaho';
-// 	// var destinationB = new google.maps.LatLng(50.087692, 14.421150);
 
 // 	var destinationIcon = 'https://chart.googleapis.com/chart?' +
 // 		'chst=d_map_pin_letter&chld=D|FF0000|000000';
@@ -110,25 +80,46 @@ $("#submitInfo").on("click", function (event) {
 
 // Directions Service API
 function initMap() {
+
+	// Google map directions varibles
+	// // links to direction service
 	var directionsService = new google.maps.DirectionsService();
+	// // renders directions
 	var directionsDisplay = new google.maps.DirectionsRenderer();
 	// var haight = new google.maps.LatLng(37.7699298, -122.4469157);
 	// var oceanBeach = new google.maps.LatLng(37.7683909618184, -122.51089453697205);
+
+	// create an origin and destination varibles; initialized to defaults.
 	var myOrigin = tdOrig;
 	var myDestination = tdDest;
 	// console.log(tdOrig, tdDest);
+	
+	// initialize varible to center map on Salt Lake City
 	var saltLake = new google.maps.LatLng(40.569022, -111.893934);
+
+	// object that sets parameters of map when initilized
 	var mapOptions = {
 		zoom: 14,
 		center: saltLake
 	}
+
+	// creates map varible and links to html id #map, and adds reference to mapOptiona Object.
 	var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+	// calls Google's method to display directions using map varible.
 	directionsDisplay.setMap(map);
+
+	// empties #directionsPanel -------------------------------NOPE! 
 	$("#directionsPanel").html('');
+
 	directionsDisplay.setPanel(document.getElementById('directionsPanel'));
+
 	calcRoute(myOrigin, myDestination, directionsService, directionsDisplay);
+
 	document.getElementById('mode').addEventListener('change', function () {
+
 		calcRoute(myOrigin, myDestination, directionsService, directionsDisplay);
+
 	});
 }
 
@@ -148,7 +139,7 @@ function calcRoute(myOrigin, myDestination, directionsService, directionsDisplay
 	};
 	directionsService.route(request, function (response, status) {
 		// console.log(response);
-		// console.log(response.routes[0].legs[0].duration_in_traffic);
+		console.log(response.routes[0].legs[0].duration_in_traffic);
 		if (status == 'OK') {
 			directionsDisplay.setDirections(response);
 			// updateTravelTime(response); // Calling it here causes it to repeat once for each database entry
@@ -167,8 +158,10 @@ database.ref().on("child_added", function (snapshot) {
 	key = snapshot.key;
 	// console.log(snapshot);
 	// console.log(key);
+
 	tTimeID = 'tTime' + key;
 
+	// appends each event from Firebase to the html table
 	$("#all-display").append("<tr><td>" + tdEventName + "</td><td>" + tdDest + "</td><td>" + tdOrig + "</td><td id=" + "'" + tTimeID + "'" + ">loading...</td></tr>");
 	
 	initMap(tdOrig, tdDest);
