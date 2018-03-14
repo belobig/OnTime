@@ -83,3 +83,13 @@
  .fixed72 {
  	max-height: 72px;
  }
+
+
+/* added shadowing, we can remove or alter */
+ h3, th {
+	text-shadow: 
+	-1px -1px 0 #000,
+	 1px 0px 0 #000,
+	 0px 1px 0 #000,
+	 1px -1px 0 #000;
+ }
