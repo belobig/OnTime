@@ -90,7 +90,8 @@ var key;
 var getKey;
 var travelTime;
 var tTimeID;
-var directions;
+var leaveBy;
+var tdLeaveBy;
 
 // Get info from input fields, and push them to firebase
 $("#submitInfo").on("click", function (event) {
@@ -151,20 +152,28 @@ function calcRoute(myOrigin, myDestination, directionsService, directionsDisplay
 			trafficModel: google.maps.TrafficModel[selectedTraffic]
 		}
 	};
-	console.log(selectedTraffic);
+
 	directionsService.route(request, function (response, status) {
 		// console.log(response);
 		// console.log(response.routes[0].legs[0].duration_in_traffic);
 		if (status == 'OK') {
 			directionsDisplay.setDirections(response);
+			travelTime = response.routes[0].legs[0].duration_in_traffic.text;
+			var travelTimeVal = response.routes[0].legs[0].duration_in_traffic.value;
+			leaveBy = moment(eventTime).subtract(travelTimeVal, 'seconds').format("MM-DD-YYYY h:mm A");
+			console.log("Travel time: " + travelTime);
+			console.log("Event Time: " + moment(eventTime).format("MM-DD-YYYY h:mm A"));
+			console.log("Leave By: " + leaveBy);
 
 			// Save the new data in Firebase -- may need to move this so it doesn't add a row each time traffic or travel modes are changed.
+			
 			database.ref().push({
 				FBeventName: eventName,
 				FBeventTime: eventTime,
 				FBorig: orig,
 				FBdest: dest,
-				FBtTime: response.routes[0].legs[0].duration_in_traffic.text,
+				FBtTime: travelTime,
+				FBleaveBy: leaveBy,
 				FBdateAdded: firebase.database.ServerValue.TIMESTAMP
 			});
 		}
@@ -179,13 +188,14 @@ database.ref().on("child_added", function (snapshot) {
 	tdDest = snapshot.val().FBdest;
 	tdEventTime = moment(snapshot.val().FBeventTime).format("MM-DD-YYYY h:mm A");
 	tdTtime = snapshot.val().FBtTime;
+	tdLeaveBy = snapshot.val().FBleaveBy;
 
 	key = snapshot.key;
 	// console.log(snapshot);
 	// console.log(key);
 
 
-	$("#all-display").append("<tr id=" + "'" + key + "'" + "><td><label><input type='radio' name='optionsRadios' class='mapRadio' id=" + "'optionsRadios" + key + "'" + " value=" + "'option" + key + "'" + "></label></td><td>" + tdEventName + "</td><td>" + tdDest + "</td><td>" + tdEventTime + "</td><td>" + tdTtime + "</td><td><button class='removeBtn btn btn-danger btn-xs'>x</button></td></tr>");
+	$("#all-display").append("<tr id=" + "'" + key + "'" + "><td><label><input type='radio' name='optionsRadios' class='mapRadio' id=" + "'optionsRadios" + key + "'" + " value=" + "'option" + key + "'" + "></label></td><td>" + tdEventName + "</td><td>" + tdDest + "</td><td>" + tdEventTime + "</td><td>" + tdTtime + "</td><td>" + tdLeaveBy + "</td><td><button class='removeBtn btn btn-danger btn-xs'>x</button></td></tr>");
 });
 
 // Remove the row of appointment information when the Remove button is clicked
