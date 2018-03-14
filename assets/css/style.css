@@ -1,73 +1,70 @@
- /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
+/* Always set the map height explicitly to define the size of the div
+* element that contains the map. */
 
- #map {
- 	height: 400px;
+/* Text font */
+ h3, th, form, b, tbody, .panel-title {
+	color: white;
+	text-shadow: 
+	1px 1px 1px #000,
+	1px 1px 1px #000,
+	1px 1px 1px #000,
+	1px 1px 1px #000;
  }
 
  /* Optional: Makes the sample page fill the window. */
-
  html, body {
- 	height: 100%;
+	 height: 100%;
  	margin: 0;
  	padding: 0;
- }
+}
 
- /* background image */
+/* Background image */
+body {
+	background: url('../images/eberhard-grossgasteiger-521851-unsplash.jpg')no-repeat bottom center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	background-color: black;
+	color: rgba(255, 255, 255, 0.699);
+}
 
- body {
- 	background: url('../images/eberhard-grossgasteiger-521851-unsplash.jpg')no-repeat bottom center fixed;
- 	-webkit-background-size: cover;
- 	-moz-background-size: cover;
- 	-o-background-size: cover;
- 	background-size: cover;
- 	background-color: black;
- 	color: rgba(255, 255, 255, 0.699);
- }
+/* Navbar Color */
+.navbar-default {
+	background: rgba(0, 0, 0, 0.664);
+	border: 0px;
+	border-radius: 0;
+}
 
- /* Navbar Color */
+/* Mode of travel */
+#floating-panel {
+ margin-bottom: 10px;
+}
 
- .navbar-default {
- 	background: rgba(0, 0, 0, 0.664);
- 	border: 0px;
- 	border-radius: 0;
- }
+/* Map */
+#map {
+ height: 400px;
+}
 
- /* Panel Header */
-
- .panel-default .panel-heading {
- 	background: transparent;
+/* Panel Header */
+.panel-default .panel-heading {
+	background: transparent;
  	border-color: rgba(0, 0, 0, 0.664);
  }
 
  /* Border on panels */
-
  .panel-default {
  	background: transparent;
  	/* background: rgba(0, 0, 0, 0.219); */
  	border: 0px;
  }
 
- /* Panel Title Font */
-
- /* .panel-title {
-	 color: rgba(255, 255, 255, 0.699);
-	 color: white;
-	 text-shadow: 
-	 1px 1px 1px #000,
-	 1px 1px 1px #000,
-	 1px 1px 1px #000,
-	 1px 1px 1px #000;
- } */
-
  /* table border */
-
  .table thead tr th {
  	border-bottom: 1px solid rgba(0, 0, 0, 0.664);
  }
 
  /* footer */
-
  .panel-footer {
  	background: rgba(0, 0, 0, 0.664);
  	border: 0px;
@@ -75,8 +72,6 @@
  	height: 40px;
  	border-radius: 0;
  }
-
- /* Panel Body */
 
  /* Make user image 40px x 40px */
 
@@ -90,15 +85,6 @@
  	max-height: 72px;
  }
 
-/* added shadowing, we can remove or alter */
- h3, th, form, b, tbody, .panel-title {
-	color: white;
-	text-shadow: 
-	1px 1px 1px #000,
-	1px 1px 1px #000,
-	1px 1px 1px #000,
-	1px 1px 1px #000;
- }
 
  .navbar-default .navbar-brand {
 	margin-top: 8px;
