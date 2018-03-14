@@ -114,11 +114,11 @@ body {
 	 margin: 5px 0!important;
  }
 
- #mode {
+ #mode, #traffic {
 	 background: black;
  }
 
- #floating-panel {
+ .floating-panel {
 	/* position: absolute;
 	top: 10px;
 	left: 25%;

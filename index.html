@@ -58,20 +58,30 @@
 						<h1>Next Appointment Goes Here</h1>
 
 						<!-- <h1>You must commit!!!!</h1> -->
-						
-						<!-- Select mode of travel -->
+
 					</div>
 					<div class="panel-body">
-						<div id="floating-panel">
-							<b>Mode of Travel: </b>
-							<select id="mode">
-								<option value="DRIVING">Driving</option>
-								<option value="WALKING">Walking</option>
-								<option value="BICYCLING">Bicycling</option>
-								<option value="TRANSIT">Transit</option>
-							</select>
+						<!-- Select mode of travel -->
+						<div id="modes">
+							<div class="floating-panel">
+								<b>Mode: </b>
+								<select id="mode">
+									<option value="DRIVING" selected>Driving</option>
+									<option value="WALKING">Walking</option>
+									<option value="BICYCLING">Bicycling</option>
+									<option value="TRANSIT">Transit</option>
+								</select>
+							</div>
+							<!-- Select traffic model -->
+							<div class="floating-panel">
+								<b>Traffic: </b>
+								<select id="traffic">
+									<option value="optimistic" selected>Optimistic</option>
+									<option value="bestguess">Best Guess</option>
+									<option value="pessimistic">Pessimistic</option>
+								</select>
+							</div>
 						</div>
-
 						<!-- Display Map -->
 						<div id="map"></div>
 						<div id="directionsPanel" style="float:right;width:100%;height: 100%"></div>
@@ -120,14 +130,18 @@
 						<table class="table">
 							<thead>
 								<tr>
+									<th>Map</th>
 									<th>Event Name</th>
 									<th>Location</th>
 									<th>Event Time</th>
 									<th>Travel Time</th>
+									<th>X</th>
 								</tr>
 							</thead>
-							<tbody id="all-display">
-							</tbody>
+							<div class="radio">
+								<tbody id="all-display">
+								</tbody>
+							</div>
 						</table>
 					</div>
 				</div>
