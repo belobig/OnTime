@@ -31,76 +31,191 @@
 ///////----------------------------------------------------------------------------------------------------------------------------------
 // Google Maps API
 ///////----------------------------------------------------------------------------------------------------------------------------------
+// function initMap() {
+
+// 	// var origin1 = new google.maps.LatLng(55.930385, -3.118425);
+// 	var origin2 = 'Salt Lake City, Utah';
+// 	var destinationA = 'Boise, Idaho';
+// 	// var destinationB = new google.maps.LatLng(50.087692, 14.421150);
+
+// 	var destinationIcon = 'https://chart.googleapis.com/chart?' +
+// 		'chst=d_map_pin_letter&chld=D|FF0000|000000';
+
+// 	var originIcon = 'https://chart.googleapis.com/chart?' +
+// 		'chst=d_map_pin_letter&chld=O|FFFF00|000000';
+// 	var map = new google.maps.Map(document.getElementById('map'), {
+// 		zoom: 13,
+// 		center: { lat: 40.569022, lng: -111.893934 }
+
+// 	});
+
+// 	var trafficLayer = new google.maps.TrafficLayer();
+// 	trafficLayer.setMap(map);
+
+// 	var geocoder = new google.maps.Geocoder;
+
+
+// //////
+// // Distance calculations
+// //////
+
+
+// var service = new google.maps.DistanceMatrixService();
+// service.getDistanceMatrix(
+// 	{
+// 		origins: [origin2],
+// 		destinations: [destinationA],
+// 		travelMode: 'DRIVING',
+// 		drivingOptions: {
+// 			departureTime: new Date(Date.now()), //leaveing now-ish
+// 			trafficModel: 'pessimistic'
+// 		},
+// 		unitSystem: google.maps.UnitSystem.IMPERIAL,
+// 		avoidHighways: false,
+// 		avoidTolls: false
+// 	}, callback);
+
+// }
+
+
+var orig;
+var dest;
+var tdEventName;
+var tdOrig = 'Salt Lake City, UT';
+var tdDest = 'Boise, ID';
+var key;
+var travelTime;
+var tTimeID;
+var directions = [];
+
+// Get info from input fields, and push them to firebase
+$("#submitInfo").on("click", function (event) {
+	// Prevent form from reloading the page on Submit
+	// event.preventDefault();
+
+	// Get the input values
+	orig = $("#origin").val().trim();
+	dest = $("#dest").val().trim();
+
+
+	// Save the new data in Firebase
+	database.ref().push({
+		orig: orig,
+		dest: dest,
+		dateAdded: firebase.database.ServerValue.TIMESTAMP
+	});
+
+
+});
+
+// Directions Service API
 function initMap() {
+	var directionsService = new google.maps.DirectionsService();
+	var directionsDisplay = new google.maps.DirectionsRenderer();
+	// var haight = new google.maps.LatLng(37.7699298, -122.4469157);
+	// var oceanBeach = new google.maps.LatLng(37.7683909618184, -122.51089453697205);
+	var myOrigin = tdOrig;
+	var myDestination = tdDest;
+	// console.log(tdOrig, tdDest);
+	var saltLake = new google.maps.LatLng(40.569022, -111.893934);
+	var mapOptions = {
+		zoom: 14,
+		center: saltLake
+	}
+	var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+	directionsDisplay.setMap(map);
+	$("#directionsPanel").html('');
+	directionsDisplay.setPanel(document.getElementById('directionsPanel'));
+	calcRoute(myOrigin, myDestination, directionsService, directionsDisplay);
+	document.getElementById('mode').addEventListener('change', function () {
+		calcRoute(myOrigin, myDestination, directionsService, directionsDisplay);
+	});
+}
 
-	// var origin1 = new google.maps.LatLng(55.930385, -3.118425);
-	var origin2 = 'Salt Lake City, Utah';
-	var destinationA = 'Boise, Idaho';
-	// var destinationB = new google.maps.LatLng(50.087692, 14.421150);
+function calcRoute(myOrigin, myDestination, directionsService, directionsDisplay) {
+	var selectedMode = document.getElementById('mode').value;
+	var request = {
+		origin: myOrigin,
+		destination: myDestination,
+		// Note that Javascript allows us to access the constant
+		// using square brackets and a string value as its
+		// "property."
+		travelMode: google.maps.TravelMode[selectedMode],
+		drivingOptions: {
+			departureTime: new Date(Date.now()),  // for the time N milliseconds from now.
+			trafficModel: 'optimistic'
+		}
+	};
+	directionsService.route(request, function (response, status) {
+		// console.log(response);
+		// console.log(response.routes[0].legs[0].duration_in_traffic);
+		if (status == 'OK') {
+			directionsDisplay.setDirections(response);
+			// updateTravelTime(response); // Calling it here causes it to repeat once for each database entry
+			directions.push(response);
+		}
+	});
+}
 
-	var destinationIcon = 'https://chart.googleapis.com/chart?' +
-		'chst=d_map_pin_letter&chld=D|FF0000|000000';
+// Each time a child, or trip, is added to the database, add it to the DOM and map
+database.ref().on("child_added", function (snapshot) {
+	//console.log("I had a child!");
+	tdEventName = snapshot.val().dateAdded;
+	tdOrig = snapshot.val().orig;
+	tdDest = snapshot.val().dest;
 
-	var originIcon = 'https://chart.googleapis.com/chart?' +
-		'chst=d_map_pin_letter&chld=O|FFFF00|000000';
-	var map = new google.maps.Map(document.getElementById('map'), {
-		zoom: 13,
-		center: { lat: 40.569022, lng: -111.893934 }
+	key = snapshot.key;
+	// console.log(snapshot);
+	// console.log(key);
+	tTimeID = 'tTime' + key;
+
+	$("#all-display").append("<tr><td>" + tdEventName + "</td><td>" + tdDest + "</td><td>" + tdOrig + "</td><td id=" + "'" + tTimeID + "'" + ">loading...</td></tr>");
+	
+	initMap(tdOrig, tdDest);
+});
+
+// To update travel time
+function updateTravelTime() {
+	database.ref().once("value", function (snapshot) {
+		snapshot.forEach(function (childSnapshot) {
+			travelTime = directions.routes[0].legs[0].duration_in_traffic.text;
+			var updtKey = childSnapshot.key;
+			var updtTtimeID = 'tTime' + updtKey;
+			console.log(travelTime);
+			$("#" + updtTtimeID + "").html(travelTime);
+		});
 
 	});
 
-	var trafficLayer = new google.maps.TrafficLayer();
-	trafficLayer.setMap(map);
-	
-	var geocoder = new google.maps.Geocoder;
-
-
-//////
-// Distance calculations
-//////
-
-
-var service = new google.maps.DistanceMatrixService();
-service.getDistanceMatrix(
-	{
-		origins: [origin2],
-		destinations: [destinationA],
-		travelMode: 'DRIVING',
-		drivingOptions: {
-			departureTime: new Date(Date.now()), //leaveing now-ish
-			trafficModel: 'pessimistic'
-		},
-		unitSystem: google.maps.UnitSystem.IMPERIAL,
-		avoidHighways: false,
-		avoidTolls: false
-	}, callback);
-
 }
-function callback(response, status) {
-	if (status == 'OK') {
-		// console.log(response);
-		var origins = response.originAddresses;
-		var destinations = response.destinationAddresses;
-		// console.log(response.originAddresses);
-		// console.log(response.destinationAddresses);
-		for (var i = 0; i < origins.length; i++) {
-			var results = response.rows[i].elements;
-			console.log(results);
-			for (var j = 0; j < results.length; j++) {
-				var element = results[j];
-				var distance = element.distance.text;
-				var duration = element.duration.text;
-				var from = origins[i];
-				var to = destinations[j];
-				console.log(element);
-				console.log(distance);
-				console.log(duration);
-				console.log(from);
-				console.log(to);
-			}
-		}
-	}
-}
+
+setTimeout(updateTravelTime, 2000);
+
+// function callback(response, status) {
+// 	if (status == 'OK') {
+// 		// console.log(response);
+// 		var origins = response.originAddresses;
+// 		var destinations = response.destinationAddresses;
+// 		// console.log(response.originAddresses);
+// 		// console.log(response.destinationAddresses);
+// 		for (var i = 0; i < origins.length; i++) {
+// 			var results = response.rows[i].elements;
+// 			console.log(results);
+// 			for (var j = 0; j < results.length; j++) {
+// 				var element = results[j];
+// 				var distance = element.distance.text;
+// 				var duration = element.duration.text;
+// 				var from = origins[i];
+// 				var to = destinations[j];
+// 				console.log(element);
+// 				console.log(distance);
+// 				console.log(duration);
+// 				console.log(from);
+// 				console.log(to);
+// 			}
+// 		}
+// 	}
+// }
 
 // callback();
 

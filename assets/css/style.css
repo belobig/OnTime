@@ -84,7 +84,6 @@
  	max-height: 72px;
  }
 
-
 /* added shadowing, we can remove or alter */
  h3, th {
 	text-shadow: 
@@ -93,3 +92,32 @@
 	 0px 1px 0 #000,
 	 1px -1px 0 #000;
  }
+
+ #firebaseui-auth-container {
+	 max-width: 150px;
+	 float: right!important;
+ }
+
+ #sign-in {
+	float: right!important;
+ }
+
+ #account-details {
+	float: right!important;
+ }
+
+ .firebaseui-card-content {
+	 padding: 0!important;
+ }
+
+ .firebaseui-idp-list {
+	 margin: 5px 0!important;
+ }
+
+ #mode {
+	 background: black;
+ }
+
+ #directionsPanel {
+	background: rgba(255, 255, 255, 0.699);
+}
