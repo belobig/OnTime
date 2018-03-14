@@ -77,12 +77,13 @@
 
 // }
 
-
-var orig;
-var dest;
+var eventName = '';
+var eventTime = '';
+var orig = '';
+var dest = '';
 var tdEventName;
-var tdOrig = 'Salt Lake City, UT';
-var tdDest = 'Boise, ID';
+var tdOrig = '';
+var tdDest = '';
 var tdTtime;
 var key;
 var travelTime;
@@ -92,14 +93,16 @@ var directions;
 // Get info from input fields, and push them to firebase
 $("#submitInfo").on("click", function (event) {
 	// Prevent form from reloading the page on Submit
-	// event.preventDefault();
+	event.preventDefault();
 
 	// Get the input values
+	eventName = $("#name").val().trim();
+	eventTime = $("#time").val();
 	orig = $("#origin").val().trim();
 	dest = $("#dest").val().trim();
 
 
-	calcRoute(orig, dest);
+	initMap(orig, dest);
 
 
 });
@@ -110,8 +113,8 @@ function initMap() {
 	var directionsDisplay = new google.maps.DirectionsRenderer();
 	// var haight = new google.maps.LatLng(37.7699298, -122.4469157);
 	// var oceanBeach = new google.maps.LatLng(37.7683909618184, -122.51089453697205);
-	var myOrigin = tdOrig;
-	var myDestination = tdDest;
+	var myOrigin = orig;
+	var myDestination = dest;
 	// console.log(tdOrig, tdDest);
 	var saltLake = new google.maps.LatLng(40.569022, -111.893934);
 	var mapOptions = {
@@ -128,7 +131,7 @@ function initMap() {
 	});
 }
 
-function calcRoute(orig, dest, directionsService, directionsDisplay) {
+function calcRoute(myOrigin, myDestination, directionsService, directionsDisplay) {
 	var selectedMode = document.getElementById('mode').value;
 	var request = {
 		origin: orig,
@@ -138,7 +141,7 @@ function calcRoute(orig, dest, directionsService, directionsDisplay) {
 		// "property."
 		travelMode: google.maps.TravelMode[selectedMode],
 		drivingOptions: {
-			departureTime: new Date(Date.now() - 300000),  // TODO: for the time N milliseconds from now. need to change this to arrival time
+			departureTime: new Date(Date.now()),// - 300000),  // TODO: for the time N milliseconds from now. need to change this to arrival time
 			trafficModel: 'pessimistic'
 		}
 	};
@@ -150,9 +153,11 @@ function calcRoute(orig, dest, directionsService, directionsDisplay) {
 			// updateTravelTime(response); // Calling it here causes it to repeat once for each database entry
 			// Save the new data in Firebase
 			database.ref().push({
+				FBeventName: eventName,
+				FBeventTime: eventTime,
 				FBorig: orig,
 				FBdest: dest,
-				FBtTime: directions.routes[0].legs[0].duration_in_traffic.text,
+				FBtTime: response.routes[0].legs[0].duration_in_traffic.text,
 				FBdateAdded: firebase.database.ServerValue.TIMESTAMP
 			});
 		}
@@ -162,7 +167,7 @@ function calcRoute(orig, dest, directionsService, directionsDisplay) {
 // Each time a child, or trip, is added to the database, add it to the DOM and map
 database.ref().on("child_added", function (snapshot) {
 	//console.log("I had a child!");
-	tdEventName = snapshot.val().FBdateAdded; // TODO: Change to user input for Event Name
+	tdEventName = snapshot.val().FBeventName; // TODO: Change to user input for Event Name
 	tdOrig = snapshot.val().FBorig;
 	tdDest = snapshot.val().FBdest;
 	tdTtime = snapshot.val().FBtTime;
@@ -170,11 +175,9 @@ database.ref().on("child_added", function (snapshot) {
 	key = snapshot.key;
 	// console.log(snapshot);
 	// console.log(key);
-	tTimeID = 'tTime' + key;
+	
 
-	$("#all-display").append("<tr><td>" + tdEventName + "</td><td>" + tdDest + "</td><td>" + tdOrig + "</td><td id=" + "'" + tTimeID + "'" + ">" +  + "</td></tr>");
-
-	initMap(tdOrig, tdDest); // TODO: move initMap call to listener when event is selected
+	$("#all-display").append("<tr><td>" + tdEventName + "</td><td>" + tdDest + "</td><td>" + tdOrig + "</td><td>" + tdTtime + "</td></tr>");
 });
 
 // To update travel time
