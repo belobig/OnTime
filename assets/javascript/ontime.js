@@ -85,5 +85,21 @@ window.addEventListener('load', function () {
 });
 
 
+// // Table data
+// database.ref().on("child_added", function (childSnapshot) {
+
+// 	var eventName = childSnapshot.val().FBeventName;
+// 	var eventLocation = childSnapshot.val().FBeventLocation;
+// 	var eventTime = childSnapshot.val().FBeventTime;
+// 	var travelTime = childSnapshot.val().FBtravelTime;
+
+// $("#all-display").append(
+// 	' <tr><td>' + eventName +
+// 	' </td><td>' + eventLocation +
+// 	' </td><td>' + eventTime +
+// 	' </td><td>' + travelTime + ' </td></tr>');
+
+// });
+
 // });
 
