@@ -85,6 +85,7 @@ var tdEventName;
 var tdOrig = '';
 var tdDest = '';
 var tdTtime;
+var tdEventTime;
 var key;
 var travelTime;
 var tTimeID;
@@ -170,14 +171,16 @@ database.ref().on("child_added", function (snapshot) {
 	tdEventName = snapshot.val().FBeventName; // TODO: Change to user input for Event Name
 	tdOrig = snapshot.val().FBorig;
 	tdDest = snapshot.val().FBdest;
+	tdEventTime = moment(snapshot.val().FBeventTime).format("MM-DD-YYYY h:mm A");
 	tdTtime = snapshot.val().FBtTime;
+	
 
 	key = snapshot.key;
 	// console.log(snapshot);
 	// console.log(key);
 	
 
-	$("#all-display").append("<tr><td>" + tdEventName + "</td><td>" + tdDest + "</td><td>" + tdOrig + "</td><td>" + tdTtime + "</td></tr>");
+	$("#all-display").append("<tr><td>" + tdEventName + "</td><td>" + tdDest + "</td><td>" + tdEventTime + "</td><td>" + tdTtime + "</td></tr>");
 });
 
 // To update travel time
