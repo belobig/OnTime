@@ -77,33 +77,34 @@
 
 // }
 
-
-var orig;
-var dest;
+var eventName = '';
+var eventTime = '';
+var orig = '';
+var dest = '';
 var tdEventName;
-var tdOrig = 'Salt Lake City, UT';
-var tdDest = 'Boise, ID';
+var tdOrig = '';
+var tdDest = '';
+var tdTtime;
+var tdEventTime;
 var key;
+var getKey;
 var travelTime;
 var tTimeID;
-var directions = [];
+var directions;
 
 // Get info from input fields, and push them to firebase
 $("#submitInfo").on("click", function (event) {
 	// Prevent form from reloading the page on Submit
-	// event.preventDefault();
+	event.preventDefault();
 
 	// Get the input values
+	eventName = $("#name").val().trim();
+	eventTime = $("#time").val();
 	orig = $("#origin").val().trim();
 	dest = $("#dest").val().trim();
 
 
-	// Save the new data in Firebase
-	database.ref().push({
-		orig: orig,
-		dest: dest,
-		dateAdded: firebase.database.ServerValue.TIMESTAMP
-	});
+	initMap(orig, dest);
 
 
 });
@@ -114,45 +115,58 @@ function initMap() {
 	var directionsDisplay = new google.maps.DirectionsRenderer();
 	// var haight = new google.maps.LatLng(37.7699298, -122.4469157);
 	// var oceanBeach = new google.maps.LatLng(37.7683909618184, -122.51089453697205);
-	var myOrigin = tdOrig;
-	var myDestination = tdDest;
+	var myOrigin = orig;
+	var myDestination = dest;
 	// console.log(tdOrig, tdDest);
-	var saltLake = new google.maps.LatLng(40.569022, -111.893934);
+	var uofuSandy = new google.maps.LatLng(40.569022, -111.893934);
 	var mapOptions = {
 		zoom: 14,
-		center: saltLake
+		center: uofuSandy
 	}
 	var map = new google.maps.Map(document.getElementById('map'), mapOptions);
 	directionsDisplay.setMap(map);
 	$("#directionsPanel").html('');
-	directionsDisplay.setPanel(document.getElementById('directionsPanel'));
+	// directionsDisplay.setPanel(document.getElementById('directionsPanel')); //TODO: uncomment this to show directions
 	calcRoute(myOrigin, myDestination, directionsService, directionsDisplay);
-	document.getElementById('mode').addEventListener('change', function () {
+	$('#modes').change(function () {
 		calcRoute(myOrigin, myDestination, directionsService, directionsDisplay);
-	});
+	}); // For some reason, this calls calcRoute twice on changes from the modes dropdowns
+	// document.getElementById('traffic').addEventListener('change', function () {
+	// 	calcRoute(myOrigin, myDestination, directionsService, directionsDisplay);
+	// });
 }
 
 function calcRoute(myOrigin, myDestination, directionsService, directionsDisplay) {
 	var selectedMode = document.getElementById('mode').value;
+	var selectedTraffic = document.getElementById('traffic').value;
 	var request = {
-		origin: myOrigin,
-		destination: myDestination,
+		origin: orig,
+		destination: dest,
 		// Note that Javascript allows us to access the constant
 		// using square brackets and a string value as its
 		// "property."
 		travelMode: google.maps.TravelMode[selectedMode],
 		drivingOptions: {
-			departureTime: new Date(Date.now()),  // for the time N milliseconds from now.
-			trafficModel: 'optimistic'
+			departureTime: new Date(Date.now()),// - 300000),  // TODO: for the time N milliseconds from now. need to change this to arrival time
+			trafficModel: google.maps.TrafficModel[selectedTraffic]
 		}
 	};
+	console.log(selectedTraffic);
 	directionsService.route(request, function (response, status) {
 		// console.log(response);
 		// console.log(response.routes[0].legs[0].duration_in_traffic);
 		if (status == 'OK') {
 			directionsDisplay.setDirections(response);
-			// updateTravelTime(response); // Calling it here causes it to repeat once for each database entry
-			directions.push(response);
+
+			// Save the new data in Firebase -- may need to move this so it doesn't add a row each time traffic or travel modes are changed.
+			database.ref().push({
+				FBeventName: eventName,
+				FBeventTime: eventTime,
+				FBorig: orig,
+				FBdest: dest,
+				FBtTime: response.routes[0].legs[0].duration_in_traffic.text,
+				FBdateAdded: firebase.database.ServerValue.TIMESTAMP
+			});
 		}
 	});
 }
@@ -160,36 +174,83 @@ function calcRoute(myOrigin, myDestination, directionsService, directionsDisplay
 // Each time a child, or trip, is added to the database, add it to the DOM and map
 database.ref().on("child_added", function (snapshot) {
 	//console.log("I had a child!");
-	tdEventName = snapshot.val().dateAdded;
-	tdOrig = snapshot.val().orig;
-	tdDest = snapshot.val().dest;
+	tdEventName = snapshot.val().FBeventName;
+	tdOrig = snapshot.val().FBorig;
+	tdDest = snapshot.val().FBdest;
+	tdEventTime = moment(snapshot.val().FBeventTime).format("MM-DD-YYYY h:mm A");
+	tdTtime = snapshot.val().FBtTime;
 
 	key = snapshot.key;
 	// console.log(snapshot);
 	// console.log(key);
-	tTimeID = 'tTime' + key;
 
-	$("#all-display").append("<tr><td>" + tdEventName + "</td><td>" + tdDest + "</td><td>" + tdOrig + "</td><td id=" + "'" + tTimeID + "'" + ">loading...</td></tr>");
-	
-	initMap(tdOrig, tdDest);
+
+	$("#all-display").append("<tr id=" + "'" + key + "'" + "><td><label><input type='radio' name='optionsRadios' class='mapRadio' id=" + "'optionsRadios" + key + "'" + " value=" + "'option" + key + "'" + "></label></td><td>" + tdEventName + "</td><td>" + tdDest + "</td><td>" + tdEventTime + "</td><td>" + tdTtime + "</td><td><button class='removeBtn btn btn-danger btn-xs'>x</button></td></tr>");
 });
 
-// To update travel time
-function updateTravelTime() {
-	database.ref().once("value", function (snapshot) {
-		snapshot.forEach(function (childSnapshot) {
-			travelTime = directions.routes[0].legs[0].duration_in_traffic.text;
-			var updtKey = childSnapshot.key;
-			var updtTtimeID = 'tTime' + updtKey;
-			console.log(travelTime);
-			$("#" + updtTtimeID + "").html(travelTime);
-		});
+// Remove the row of appointment information when the Remove button is clicked
+$("body").on("click", ".removeBtn", function () {
+	$(this).closest('tr').remove();
+	getKey = $(this).parent().parent().attr('id');
+	database.ref().child(getKey).remove();
+});
 
+// Show the directions on the map for selected row when the radio button is clicked
+$("body").on("click", ".mapRadio", function () {
+	getKey = $(this).parent().parent().parent().attr('id');
+	database.ref("/" + getKey + "").once("value", function (childSnapshot) {
+		// console.log(childSnapshot.val().FBorig);
+		orig = childSnapshot.val().FBorig;
+		dest = childSnapshot.val().FBdest;
+		initMapAgain(orig, dest);
 	});
 
+});
+
+// Display route on the map when an existing appointment is selected
+function initMapAgain() {
+	var directionsService = new google.maps.DirectionsService();
+	var directionsDisplay = new google.maps.DirectionsRenderer();
+	// var haight = new google.maps.LatLng(37.7699298, -122.4469157);
+	// var oceanBeach = new google.maps.LatLng(37.7683909618184, -122.51089453697205);
+	var myOrigin = orig;
+	var myDestination = dest;
+	// console.log(tdOrig, tdDest);
+	var uofuSandy = new google.maps.LatLng(40.569022, -111.893934);
+	var mapOptions = {
+		zoom: 14,
+		center: uofuSandy
+	}
+	var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+	directionsDisplay.setMap(map);
+	$("#directionsPanel").html('');
+	// directionsDisplay.setPanel(document.getElementById('directionsPanel')); //TODO: uncomment this to show directions
+
+	// From calcRoute
+	var selectedMode = document.getElementById('mode').value;
+	var selectedTraffic = document.getElementById('traffic').value;
+	var request = {
+		origin: orig,
+		destination: dest,
+		// Note that Javascript allows us to access the constant
+		// using square brackets and a string value as its
+		// "property."
+		travelMode: google.maps.TravelMode[selectedMode],
+		drivingOptions: {
+			departureTime: new Date(Date.now()),// - 300000),  // TODO: for the time N milliseconds from now. need to change this to arrival time
+			trafficModel: google.maps.TrafficModel[selectedTraffic]
+		}
+	};
+	console.log(selectedTraffic);
+	directionsService.route(request, function (response, status) {
+		// console.log(response);
+		// console.log(response.routes[0].legs[0].duration_in_traffic);
+		if (status == 'OK') {
+			directionsDisplay.setDirections(response);
+		}
+	});
 }
 
-setTimeout(updateTravelTime, 2000);
 
 // function callback(response, status) {
 // 	if (status == 'OK') {
