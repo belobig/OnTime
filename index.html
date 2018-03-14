@@ -24,144 +24,46 @@
 
 <body>
 
-	<!-- navbar -->
-	<nav class="navbar navbar-default fixed72">
-		<div class="container-fluid fixed72">
-			<a class="navbar-brand" href="#">OnTime</a>
-			<ul class="nav navbar-nav navbar-right">
-				<li>
-					<div id="firebaseui-auth-container"></div>
-				</li>
-				<li>
-					<div id="sign-in">
-						<button class="btn btn-primary" id="signOutBtn" data-toggle="tooltip" data-placement="left" title="Sign Out">
-							<span class="glyphicon glyphicon-log-out"></span>
-						</button>
-					</div>
-				</li>
-				<li>
-					<div id="account-details"></div>
-				</li>
-			</ul>
-		</div>
-	</nav>
+	<div class="wrapper">
 
-	<!-- map -->
-	<div class="container">
-		<div class="row">
-			<div class="col-sm-12 col-md-12 col-lg-12">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title"></h3>
-
-						<!-- next appointment -->
-						<h1>Next Appointment Goes Here</h1>
-
-						<!-- <h1>You must commit!!!!</h1> -->
-						
-						<!-- Select mode of travel -->
-					</div>
-					<div class="panel-body">
-						<div id="floating-panel">
-							<b>Mode of Travel: </b>
-							<select id="mode">
-								<option value="DRIVING">Driving</option>
-								<option value="WALKING">Walking</option>
-								<option value="BICYCLING">Bicycling</option>
-								<option value="TRANSIT">Transit</option>
-							</select>
+		<!-- navbar -->
+		<nav class="navbar navbar-default fixed72">
+			<div class="container-fluid fixed72">
+				<a class="navbar-brand" href="#">OnTime</a>
+				<ul class="nav navbar-nav navbar-right">
+					<li>
+						<div id="firebaseui-auth-container"></div>
+					</li>
+					<li>
+						<div id="sign-in">
+							<button class="btn btn-primary" id="signOutBtn" data-toggle="tooltip" data-placement="left" title="Sign Out">
+								<span class="glyphicon glyphicon-log-out"></span>
+							</button>
 						</div>
-
-						<!-- Display Map -->
-						<div id="map"></div>
-						<div id="directionsPanel" style="float:right;width:100%;height: 100%"></div>
-					</div>
-				</div>
+					</li>
+					<li>
+						<div id="account-details"></div>
+					</li>
+				</ul>
 			</div>
-		</div>
-
-		<!-- New event form -->
-		<div class="row">
-			<div class="col-sm-12 col-md-12 col-lg-12">
-				<div class="panel panel-default">
-					<div class="panel-body">
-						<form>
-							<div class="form-group">
-								<label for="name">Event Name</label>
-								<input type="text" class="form-control" id="name" placeholder="Dentist Appointment">
+		</nav>
+	
+	
+			<!-- Appointment Table -->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-12 col-md-12 col-lg-12">
+						<div class="panel panel-default">
+							<div class="panel-body">
+								<p>Please Sign In</p>
 							</div>
-							<div class="form-group">
-								<label for="time">Event Time</label>
-								<input type="time" class="form-control" id="time" placeholder="">
-							</div>
-							<div class="form-group">
-								<label for="origin">Origin</label>
-								<input type="text" class="form-control" id="origin" placeholder="Salt Lake City, UT">
-							</div>
-							<div class="form-group">
-								<label for="dest">Destination</label>
-								<input type="text" class="form-control" id="dest" placeholder="Boise, ID">
-							</div>
-							<button type="submit" class="btn btn-primary" id="submitInfo">Submit</button>
-						</form>
+						</div>
 					</div>
 				</div>
 			</div>
+			<!-- End Wrapper -->
 		</div>
 
-		<!-- User input table -->
-		<div class="row">
-			<div class="col-sm-12 col-md-12 col-lg-12">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">Scheduled Events</h3>
-					</div>
-					<div class="panel-body">
-						<table class="table">
-							<thead>
-								<tr>
-									<th>Event Name</th>
-									<th>Location</th>
-									<th>Event Time</th>
-									<th>Travel Time</th>
-								</tr>
-							</thead>
-							<tbody id="all-display">
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<!-- Calendar -->
-		<div class="row">
-			<div class="col-sm-12 col-md-12 col-lg-12">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">Calendar</h3>
-					</div>
-					<div class="panel-body">
-						<pre id="calendar"></pre>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<!-- Appointment Table -->
-		<div class="row">
-			<div class="col-sm-12 col-md-12 col-lg-12">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">Appointments</h3>
-					</div>
-					<div class="panel-body">
-						Panel content
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 
 	<!-- Footer -->
 	<footer class="panel panel-footer">
