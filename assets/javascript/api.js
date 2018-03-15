@@ -19,6 +19,7 @@ var tTimeID;
 var leaveBy;
 var tdLeaveBy;
 var rows = [];
+var infoWindow;
 
 // Get info from input fields, and push them to firebase
 $("#submitInfo").on("click", function (event) {
@@ -66,8 +67,36 @@ function initMap() {
 	// calls Google's method to display directions using map varible.
 	directionsDisplay.setMap(map);
 
-	// empties #directionsPanel -------------------------------NOPE! 
-	$("#directionsPanel").html('');
+	// Geolocation - it'll be cool if this works
+	infoWindow = new google.maps.InfoWindow;
+
+        // Try HTML5 geolocation.
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+
+            infoWindow.setPosition(pos);
+            infoWindow.setContent('Location found.');
+            infoWindow.open(map);
+            map.setCenter(pos);
+          }, function() {
+            handleLocationError(true, infoWindow, map.getCenter());
+          });
+        } else {
+          // Browser doesn't support Geolocation
+          handleLocationError(false, infoWindow, map.getCenter());
+        }
+      }
+
+      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+                              'Error: The Geolocation service failed.' :
+                              'Error: Your browser doesn\'t support geolocation.');
+        infoWindow.open(map);
 
 
 	// directionsDisplay.setPanel(document.getElementById('directionsPanel')); //TODO: uncomment this to show directions
