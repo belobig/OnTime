@@ -19,7 +19,7 @@ var database = firebase.database();
 
 // FirebaseUI config.
 var uiConfig = {
-	signInSuccessUrl: 'index.html',
+	signInSuccessUrl: 'home.html',
 	signInOptions: [
 		// Leave the lines as is for the providers you want to offer your users.
 		firebase.auth.GoogleAuthProvider.PROVIDER_ID,
@@ -35,8 +35,6 @@ ui.start('#firebaseui-auth-container', uiConfig);
 
 
 var signOutBtn = '<button class="btn btn-primary" id="signOutBtn" data-toggle="tooltip" data-placement="left" title="Sign Out"><span class="glyphicon glyphicon-log-out"></span></button>';
-
-// var playArea = '<div class="col-lg-12 text-center whtRndBrdr" id="playArea"><h1>On Time</h1></div>';
 
 
 
@@ -58,13 +56,13 @@ initApp = function () {
 				$("#signOutBtn").on("click", function () {
 					firebase.auth().signOut().then(function () {
 						console.log('Signed Out');
+						window.location.replace("index.html");
 					}, function (error) {
 						console.error('Sign Out Error', error);
 					});
 				});
 			});
 
-			// $("#mainArea").html(playArea);
 			console.log("User is Signed IN!");
 
 		} else {
@@ -72,7 +70,6 @@ initApp = function () {
 			document.getElementById('account-details').innerHTML = '';
 			document.getElementById('sign-in').innerHTML = '';
 			$("#firebaseui-auth-container").show();
-			// $("#mainArea").html('');
 			console.log("User is signed out");
 		}
 	}, function (error) {

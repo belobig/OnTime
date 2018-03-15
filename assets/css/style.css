@@ -2,7 +2,7 @@
 * element that contains the map. */
 
 /* Text font */
- h3, th, form, b, tbody, .panel-title {
+ h3, th, form, b, tbody, .panel-title, p {
 	color: white;
 	text-shadow: 
 	1px 1px 1px #000,
@@ -13,9 +13,15 @@
 
  /* Optional: Makes the sample page fill the window. */
  html, body {
-	 height: 100%;
+	height: 100%;
  	margin: 0;
- 	padding: 0;
+	 padding: 0;
+
+}
+
+.wrapper {
+min-height: 100%;
+
 }
 
 /* Background image */
@@ -64,13 +70,23 @@ body {
  	border-bottom: 1px solid rgba(0, 0, 0, 0.664);
  }
 
+ p {
+	 font-size: 30px;
+	text-align: center;
+ }
+
  /* footer */
  .panel-footer {
  	background: rgba(0, 0, 0, 0.664);
  	border: 0px;
  	margin-bottom: 0;
- 	height: 40px;
+ 	/* height: 40px; */
  	border-radius: 0;
+	position: relative;
+	margin-top: -40px; /* negative value of footer height */
+	height: 40px;
+	clear: both;
+	padding-top: 20px;
  }
 
  /* Make user image 40px x 40px */
@@ -114,11 +130,11 @@ body {
 	 margin: 5px 0!important;
  }
 
- #mode {
+ #mode, #traffic {
 	 background: black;
  }
 
- #floating-panel {
+ .floating-panel {
 	/* position: absolute;
 	top: 10px;
 	left: 25%;
