@@ -71,34 +71,35 @@ function initMap() {
 	// Geolocation - it'll be cool if this works
 	infoWindow = new google.maps.InfoWindow;
 
-        // Try HTML5 geolocation.
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(function(position) {
-            var pos = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude
-            };
+	// Try HTML5 geolocation.
+	if (navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition(function (position) {
+			var pos = {
+				lat: position.coords.latitude,
+				lng: position.coords.longitude
+			};
 
-            infoWindow.setPosition(pos);
-            infoWindow.setContent('Location found.');
-            infoWindow.open(map);
-						map.setCenter(pos);
-						userLocation = pos;
-          }, function() {
-            handleLocationError(true, infoWindow, map.getCenter());
-          });
-        } else {
-          // Browser doesn't support Geolocation
-          handleLocationError(false, infoWindow, map.getCenter());
-        }
-      }
+			infoWindow.setPosition(pos);
+			infoWindow.setContent('Location found.');
+			infoWindow.open(map);
+			map.setCenter(pos);
+			userLocation = pos;
+		}, function () {
+			handleLocationError(true, infoWindow, map.getCenter());
+		});
+	} else {
+		// Browser doesn't support Geolocation
+		handleLocationError(false, infoWindow, map.getCenter());
+	}
+}
 
-      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-        infoWindow.setPosition(pos);
-        infoWindow.setContent(browserHasGeolocation ?
-                              'Error: The Geolocation service failed.' :
-                              'Error: Your browser doesn\'t support geolocation.');
-        infoWindow.open(map);
+function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+	infoWindow.setPosition(pos);
+	infoWindow.setContent(browserHasGeolocation ?
+		'Error: The Geolocation service failed.' :
+		'Error: Your browser doesn\'t support geolocation.');
+	infoWindow.open(map);
+	calcRoute(myOrigin, myDestination, directionsService, directionsDisplay);
 }
 
 // Directions Service API
@@ -247,29 +248,29 @@ function initMapAgain() {
 	directionsDisplay.setMap(map);
 
 	// temp comment while testing modal
-// 	// uses arrow notation () => only works with non-method functions
-// 	$("#shdirections").on("click", () => {
-// 		// calcRoute();
-// 		if (directionsClosed) {
-// 			directionsClosed = false;
-// 			$("#shdirections").addClass("hidden");
-// 			$("#hidedirections").removeClass("hidden");
-// 			directionsDisplay.setPanel(document.getElementById('directionsPanel'));
-// 		}
+	// 	// uses arrow notation () => only works with non-method functions
+	// 	$("#shdirections").on("click", () => {
+	// 		// calcRoute();
+	// 		if (directionsClosed) {
+	// 			directionsClosed = false;
+	// 			$("#shdirections").addClass("hidden");
+	// 			$("#hidedirections").removeClass("hidden");
+	// 			directionsDisplay.setPanel(document.getElementById('directionsPanel'));
+	// 		}
 
-// 	});
-// // uses arrow notation () => only works with non-method functions
-// 	$("#hidedirections").on("click", () => {
-	
-// 		if (directionsClosed === false) {
-			
-// 			directionsClosed = true;
-// 			$("#shdirections").removeClass("hidden");
-// 			$("#hidedirections").addClass("hidden");
-// 			directionsDisplay.set('directions', null);
-// 		}
+	// 	});
+	// // uses arrow notation () => only works with non-method functions
+	// 	$("#hidedirections").on("click", () => {
 
-			// uses arrow notation () => only works with non-method functions
+	// 		if (directionsClosed === false) {
+
+	// 			directionsClosed = true;
+	// 			$("#shdirections").removeClass("hidden");
+	// 			$("#hidedirections").addClass("hidden");
+	// 			directionsDisplay.set('directions', null);
+	// 		}
+
+	// uses arrow notation () => only works with non-method functions
 	$("#modal-button").on("click", () => {
 		// calcRoute();
 		if (directionsClosed) {
@@ -277,8 +278,8 @@ function initMapAgain() {
 			$("#shdirections").addClass("hidden");
 			$("#hidedirections").removeClass("hidden");
 			directionsDisplay.setPanel(document.getElementById('directionsPanel'));
-		}else if (directionsClosed === false) {
-			
+		} else if (directionsClosed === false) {
+
 			directionsClosed = true;
 			$("#shdirections").removeClass("hidden");
 			$("#hidedirections").addClass("hidden");
