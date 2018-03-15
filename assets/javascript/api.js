@@ -20,6 +20,7 @@ var leaveBy;
 var tdLeaveBy;
 var rows = [];
 var infoWindow;
+var userLocation;
 
 // Get info from input fields, and push them to firebase
 $("#submitInfo").on("click", function (event) {
@@ -33,7 +34,7 @@ $("#submitInfo").on("click", function (event) {
 	dest = $("#dest").val().trim();
 
 
-	initMap(orig, dest);
+	initMap2(orig, dest);
 
 
 });
@@ -81,7 +82,8 @@ function initMap() {
             infoWindow.setPosition(pos);
             infoWindow.setContent('Location found.');
             infoWindow.open(map);
-            map.setCenter(pos);
+						map.setCenter(pos);
+						userLocation = pos;
           }, function() {
             handleLocationError(true, infoWindow, map.getCenter());
           });
@@ -97,6 +99,36 @@ function initMap() {
                               'Error: The Geolocation service failed.' :
                               'Error: Your browser doesn\'t support geolocation.');
         infoWindow.open(map);
+}
+
+// Directions Service API
+function initMap2() {
+
+	// Google map directions varibles
+	// // links to direction service
+	var directionsService = new google.maps.DirectionsService();
+
+	// // renders directions
+	var directionsDisplay = new google.maps.DirectionsRenderer();
+
+	// var haight = new google.maps.LatLng(37.7699298, -122.4469157);
+	// var oceanBeach = new google.maps.LatLng(37.7683909618184, -122.51089453697205);
+
+	// object that sets parameters of map when initilized
+	var myOrigin = orig;
+	var myDestination = dest;
+	// console.log(tdOrig, tdDest);
+	var uofuSandy = new google.maps.LatLng(40.569022, -111.893934);
+	var mapOptions = {
+		zoom: 14,
+		center: uofuSandy
+	}
+
+	// creates map varible and links to html id #map, and adds reference to mapOptiona Object.
+	var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+	// calls Google's method to display directions using map varible.
+	directionsDisplay.setMap(map);
 
 
 	// directionsDisplay.setPanel(document.getElementById('directionsPanel')); //TODO: uncomment this to show directions
@@ -213,7 +245,6 @@ function initMapAgain() {
 	var directionsClosed = true;
 	var map = new google.maps.Map(document.getElementById('map'), mapOptions);
 	directionsDisplay.setMap(map);
-	$("#directionsPanel").html('');
 
 	// temp comment while testing modal
 // 	// uses arrow notation () => only works with non-method functions
