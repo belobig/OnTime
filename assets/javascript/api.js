@@ -72,33 +72,35 @@ function initMap() {
 
 	// directionsDisplay.setPanel(document.getElementById('directionsPanel')); //TODO: uncomment this to show directions
 	calcRoute(myOrigin, myDestination, directionsService, directionsDisplay);
-	$('#modes').change(function () {
-		calcRoute(myOrigin, myDestination, directionsService, directionsDisplay);
-	}); // For some reason, this calls calcRoute twice on changes from the modes dropdowns
+	// $('#modes').change(function () {
+	// 	calcRoute(myOrigin, myDestination, directionsService, directionsDisplay);
+	// }); // For some reason, this calls calcRoute twice on changes from the modes dropdowns
 	// document.getElementById('traffic').addEventListener('change', function () {
 	// 	calcRoute(myOrigin, myDestination, directionsService, directionsDisplay);
 	// });
 }
 
 function calcRoute(myOrigin, myDestination, directionsService, directionsDisplay) {
-	var selectedMode = document.getElementById('mode').value;
-	var selectedTraffic = document.getElementById('traffic').value;
+	// var selectedMode = document.getElementById('mode').value;
+	// var selectedTraffic = document.getElementById('traffic').value; // TODO: These can be uncommented if we get it to not call calcRoute multiple times when mode is selected
 	var request = {
 		origin: orig,
 		destination: dest,
 		// Note that Javascript allows us to access the constant
 		// using square brackets and a string value as its
 		// "property."
-		travelMode: google.maps.TravelMode[selectedMode],
+		// travelMode: google.maps.TravelMode[selectedMode],
+		travelMode: 'DRIVING',
 		drivingOptions: {
-			departureTime: new Date(Date.now()),// - 300000),  // TODO: for the time N milliseconds from now. need to change this to arrival time
-			trafficModel: google.maps.TrafficModel[selectedTraffic]
+			departureTime: new Date(Date.now()),
+			// trafficModel: google.maps.TrafficModel[selectedTraffic]
+			trafficModel: 'pessimistic'
 		}
 	};
 
 	directionsService.route(request, function (response, status) {
 		// console.log(response);
-		console.log(response.routes[0].legs[0].duration_in_traffic);
+		// console.log(response.routes[0].legs[0].duration_in_traffic);
 		if (status == 'OK') {
 			directionsDisplay.setDirections(response);
 			travelTime = response.routes[0].legs[0].duration_in_traffic.text;
@@ -226,21 +228,23 @@ function initMapAgain() {
 	// directionsDisplay.setPanel(document.getElementById('directionsPanel')); //TODO: uncomment this to show directions
 
 	// From calcRoute
-	var selectedMode = document.getElementById('mode').value;
-	var selectedTraffic = document.getElementById('traffic').value;
+	// var selectedMode = document.getElementById('mode').value; // TODO: These can be uncommented if we get it to not call calcRoute multiple times when mode is selected
+	// var selectedTraffic = document.getElementById('traffic').value;
 	var request = {
 		origin: orig,
 		destination: dest,
 		// Note that Javascript allows us to access the constant
 		// using square brackets and a string value as its
 		// "property."
-		travelMode: google.maps.TravelMode[selectedMode],
+		// travelMode: google.maps.TravelMode[selectedMode],
+		travelMode: 'DRIVING',
 		drivingOptions: {
-			departureTime: new Date(Date.now()),// - 300000),  // TODO: for the time N milliseconds from now. need to change this to arrival time
-			trafficModel: google.maps.TrafficModel[selectedTraffic]
+			departureTime: new Date(Date.now()),
+			// trafficModel: google.maps.TrafficModel[selectedTraffic]
+			trafficModel: 'pessimistic'
 		}
 	};
-	console.log(selectedTraffic);
+	// console.log(selectedTraffic);
 	directionsService.route(request, function (response, status) {
 		// console.log(response);
 		// console.log(response.routes[0].legs[0].duration_in_traffic);
@@ -288,9 +292,6 @@ function sortTable() {
 
 function getFirstRow() {
 	var firstRow = rows[0];
-	var arrayOfTDs = [];
-	arrayOfTDs.push(firstRow.getElementsByTagName("td"));
-	// console.log(arrayOfTDs.slice(1, 6));
 	$("#next-display").html(firstRow);
 }
 
