@@ -294,7 +294,7 @@ function compareArrays(array1, array2, dontConvert) {
 function warn(msg) {
 	if (hooks.suppressDeprecationWarnings === false &&
 					(typeof console !==  'undefined') && console.warn) {
-			console.warn('Deprecation warning: ' + msg);
+			// console.warn('Deprecation warning: ' + msg);
 	}
 }
 
