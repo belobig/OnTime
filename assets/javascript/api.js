@@ -21,6 +21,7 @@ var tdLeaveBy;
 var rows = [];
 var infoWindow;
 var userLocation;
+var geocoder;
 
 // Get info from input fields, and push them to firebase
 $("#submitInfo").on("click", function (event) {
@@ -48,6 +49,9 @@ function initMap() {
 
 	// // renders directions
 	var directionsDisplay = new google.maps.DirectionsRenderer();
+
+	// calls in the geocoder service
+	geocoder = new google.maps.Geocoder;
 
 	// var haight = new google.maps.LatLng(37.7699298, -122.4469157);
 	// var oceanBeach = new google.maps.LatLng(37.7683909618184, -122.51089453697205);
@@ -357,6 +361,46 @@ function getFirstRow() {
 }
 
 setTimeout(getFirstRow, 2000);
+
+// Click listener for Use My Location button
+$("#getUserLocation").click(function () {
+	console.log(userLocation);
+	var userLat = userLocation.lat;
+	var userLng = userLocation.lng;
+	geocodeLatLng(geocoder, userLat, userLng);
+});
+
+// To Reverse Geocode an address from a lat/lng pair
+function geocodeLatLng(geocoder, userLat, userLng) {
+	var input = (userLat + "," + userLng);
+	var latlngStr = input.split(',', 2);
+	var latlng = {lat: parseFloat(latlngStr[0]), lng: parseFloat(latlngStr[1])};
+	console.log(latlng);
+	var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 14,
+    center: userLocation
+	});
+	var infowindow = new google.maps.InfoWindow;
+  geocoder.geocode({'location': latlng}, function(results, status) {
+    if (status === 'OK') {
+      if (results[0]) {
+        map.setZoom(14);
+        var marker = new google.maps.Marker({
+          position: latlng,
+          map: map
+        });
+				infowindow.setContent(results[0].formatted_address);
+				$("#origin").val(results[0].formatted_address);
+				console.log(results[0].formatted_address);
+        infowindow.open(map, marker);
+      } else {
+        window.alert('No results found');
+      }
+    } else {
+      window.alert('Geocoder failed due to: ' + status);
+    }
+  });
+}
 
 // function callback(response, status) {
 // 	if (status == 'OK') {
