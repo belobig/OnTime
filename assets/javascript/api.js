@@ -92,6 +92,7 @@ var travelTime;
 var tTimeID;
 var leaveBy;
 var tdLeaveBy;
+var rows = [];
 
 // Get info from input fields, and push them to firebase
 $("#submitInfo").on("click", function (event) {
@@ -265,7 +266,7 @@ function initMapAgain() {
 
 // To sort items in the table by time, oldest first
 function sortTable() {
-  var table, rows, switching, i, x, y, shouldSwitch;
+  var table, switching, i, x, y, shouldSwitch;
   table = document.getElementById("all-display");
   switching = true;
   /*Make a loop that will continue until
@@ -286,19 +287,28 @@ function sortTable() {
       //check if the two rows should switch place:
       if (moment(x.innerHTML) > moment(y.innerHTML)) {
         //if so, mark as a switch and break the loop:
-        shouldSwitch= true;
-        break;
-      }
+				shouldSwitch= true;
+				break;
+			}
     }
     if (shouldSwitch) {
       /*If a switch has been marked, make the switch
       and mark that a switch has been done:*/
       rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-      switching = true;
-    }
-  }
+			switching = true;
+		}
+	}
 }
 
+function getFirstRow () {
+	var firstRow = rows[0];
+	var arrayOfTDs = [];
+	arrayOfTDs.push(firstRow.getElementsByTagName("td"));
+	// console.log(arrayOfTDs.slice(1, 6));
+	$("#next-display").html(firstRow);
+}
+
+setTimeout(getFirstRow, 2000);
 
 // function callback(response, status) {
 // 	if (status == 'OK') {
