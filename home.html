@@ -100,11 +100,15 @@
 							</div>
 							<!-- Display Map -->
 							<div id="map"></div>
-							<div id="directionsPanel" style="float:right;width:100%;height: 100%">
+							<!-- <div id="directionsPanel" style="float:right;width:100%;height: 100%"> -->
 								
 							</div>
 							<button type="submit" class="btn btn-primary btn-sm" id="shdirections">Show Directions</button>
+
 							<button type="submit" class="btn btn-primary btn-sm hidden" id="hidedirections">Hide</button>
+
+							<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal" id="modal-button">modal</button>
+						
 						</div>
 					</div>
 				</div>
@@ -204,6 +208,30 @@
 	<!-- Footer -->
 	<footer class="panel panel-footer">
 	</footer>
+
+		<!-- Button trigger modal -->
+		
+	
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+					</div>
+					<!-- does not seem to pull any data? -->
+					<div class="modal-body" id="directionsPanel">
+						
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
 
 
 	<!-- Adding JQuery -->

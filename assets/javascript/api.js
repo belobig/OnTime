@@ -2,50 +2,6 @@
 ///////----------------------------------------------------------------------------------------------------------------------------------
 // Google Maps API
 ///////----------------------------------------------------------------------------------------------------------------------------------
-// function initMap() {
-
-
-// 	var origin2 = 'Salt Lake City, Utah';
-// 	var destinationA = 'Boise, Idaho';
-
-// 	var destinationIcon = 'https://chart.googleapis.com/chart?' +
-// 		'chst=d_map_pin_letter&chld=D|FF0000|000000';
-
-// 	var originIcon = 'https://chart.googleapis.com/chart?' +
-// 		'chst=d_map_pin_letter&chld=O|FFFF00|000000';
-// 	var map = new google.maps.Map(document.getElementById('map'), {
-// 		zoom: 13,
-// 		center: { lat: 40.569022, lng: -111.893934 }
-
-// 	});
-
-// 	var trafficLayer = new google.maps.TrafficLayer();
-// 	trafficLayer.setMap(map);
-
-// 	var geocoder = new google.maps.Geocoder;
-
-
-// //////
-// // Distance calculations
-// //////
-
-
-// var service = new google.maps.DistanceMatrixService();
-// service.getDistanceMatrix(
-// 	{
-// 		origins: [origin2],
-// 		destinations: [destinationA],
-// 		travelMode: 'DRIVING',
-// 		drivingOptions: {
-// 			departureTime: new Date(Date.now()), //leaveing now-ish
-// 			trafficModel: 'pessimistic'
-// 		},
-// 		unitSystem: google.maps.UnitSystem.IMPERIAL,
-// 		avoidHighways: false,
-// 		avoidTolls: false
-// 	}, callback);
-
-// }
 
 var eventName = '';
 var eventTime = '';
@@ -123,14 +79,6 @@ function initMap() {
 	// 	calcRoute(myOrigin, myDestination, directionsService, directionsDisplay);
 	// });
 }
-
-function showDirections() {
-	$("#shdirections").on("click", () => {
-		// calcRoute();
-		directionsDisplay.setPanel(document.getElementById('directionsPanel'));
-	})
-};
-
 
 function calcRoute(myOrigin, myDestination, directionsService, directionsDisplay) {
 	var selectedMode = document.getElementById('mode').value;
@@ -236,29 +184,43 @@ function initMapAgain() {
 	directionsDisplay.setMap(map);
 	$("#directionsPanel").html('');
 
-	$("#shdirections").on("click", () => {
+	// temp comment while testing modal
+// 	// uses arrow notation () => only works with non-method functions
+// 	$("#shdirections").on("click", () => {
+// 		// calcRoute();
+// 		if (directionsClosed) {
+// 			directionsClosed = false;
+// 			$("#shdirections").addClass("hidden");
+// 			$("#hidedirections").removeClass("hidden");
+// 			directionsDisplay.setPanel(document.getElementById('directionsPanel'));
+// 		}
+
+// 	});
+// // uses arrow notation () => only works with non-method functions
+// 	$("#hidedirections").on("click", () => {
+	
+// 		if (directionsClosed === false) {
+			
+// 			directionsClosed = true;
+// 			$("#shdirections").removeClass("hidden");
+// 			$("#hidedirections").addClass("hidden");
+// 			directionsDisplay.set('directions', null);
+// 		}
+
+			// uses arrow notation () => only works with non-method functions
+	$("#modal-button").on("click", () => {
 		// calcRoute();
 		if (directionsClosed) {
 			directionsClosed = false;
 			$("#shdirections").addClass("hidden");
 			$("#hidedirections").removeClass("hidden");
 			directionsDisplay.setPanel(document.getElementById('directionsPanel'));
-		} else if (directionsClosed === false) {
-			// document.getElementById('directionsPanel');
-			directionsClosed = true;
-			$("#shdirections").removeClass("hidden");
-			$("#directionsPanel").html('');
-		}
-	});
-
-	$("#hidedirections").on("click", () => {
-		// calcRoute();
-		if (directionsClosed === false) {
-			// document.getElementById('directionsPanel');
+		}else if (directionsClosed === false) {
+			
 			directionsClosed = true;
 			$("#shdirections").removeClass("hidden");
 			$("#hidedirections").addClass("hidden");
-			$("#directionsPanel").html('');
+			directionsDisplay.set('directions', null);
 		}
 	});
 	// directionsDisplay.setPanel(document.getElementById('directionsPanel')); //TODO: uncomment this to show directions
@@ -362,6 +324,7 @@ setTimeout(getFirstRow, 2000);
 
 // callback();
 
+// removed Google Calendar due to Auth. compatability issues; using firebase auth vs. google api auth. ... additionally calendar did not populate, unknown if due to auth issues. 
 
 ///////----------------------------------------------------------------------------------------------------------------------------------
 // Google calendar API
