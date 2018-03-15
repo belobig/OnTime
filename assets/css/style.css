@@ -70,6 +70,12 @@ body {
  	border-bottom: 1px solid rgba(0, 0, 0, 0.664);
  }
 
+ /* moves the tables into pages' normal view (do not have to scroll right) */
+ /* didn't know you could go negative */
+ .table {
+	 margin-left: -25px;
+ }
+
  p {
 	 font-size: 30px;
 	text-align: center;
@@ -151,4 +157,18 @@ body {
 
  #directionsPanel {
 	background: rgba(255, 255, 255, 0.699);
+}
+
+.panel-footer {
+	margin-top: 30px;
+}
+
+/* spaceing between signout btn and right edge/username */
+.btn {
+	margin-right: 5px;
+	margin-left: 5px;
+}
+
+.modal-body {
+	color: black;
 }

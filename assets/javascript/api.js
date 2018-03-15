@@ -1,81 +1,7 @@
-// // Initialize Firebase
-// var config = {
-// 	apiKey: "AIzaSyBotbBY-lxslbb-cQaeMtvpFeZuRQNYyvA",
-// 	authDomain: "ontime-7e71b.firebaseapp.com",
-// 	databaseURL: "https://ontime-7e71b.firebaseio.com",
-// 	projectId: "ontime-7e71b",
-// 	storageBucket: "ontime-7e71b.appspot.com",
-// 	messagingSenderId: "680626336941"
-// };
-// firebase.initializeApp(config);
-
-// var database = firebase.database();
-
-
-// // FirebaseUI config.
-// var uiConfig = {
-// 	signInSuccessUrl: 'index.html',
-// 	signInOptions: [
-// 		// Leave the lines as is for the providers you want to offer your users.
-// 		firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-// 	],
-// 	// Terms of service url.
-// 	tosUrl: '<your-tos-url>'
-// };
-
-// // Initialize the FirebaseUI Widget using Firebase.
-// var ui = new firebaseui.auth.AuthUI(firebase.auth());
-// // The start method will wait until the DOM is loaded.
-// ui.start('#firebaseui-auth-container', uiConfig);
 
 ///////----------------------------------------------------------------------------------------------------------------------------------
 // Google Maps API
 ///////----------------------------------------------------------------------------------------------------------------------------------
-// function initMap() {
-
-// 	// var origin1 = new google.maps.LatLng(55.930385, -3.118425);
-// 	var origin2 = 'Salt Lake City, Utah';
-// 	var destinationA = 'Boise, Idaho';
-// 	// var destinationB = new google.maps.LatLng(50.087692, 14.421150);
-
-// 	var destinationIcon = 'https://chart.googleapis.com/chart?' +
-// 		'chst=d_map_pin_letter&chld=D|FF0000|000000';
-
-// 	var originIcon = 'https://chart.googleapis.com/chart?' +
-// 		'chst=d_map_pin_letter&chld=O|FFFF00|000000';
-// 	var map = new google.maps.Map(document.getElementById('map'), {
-// 		zoom: 13,
-// 		center: { lat: 40.569022, lng: -111.893934 }
-
-// 	});
-
-// 	var trafficLayer = new google.maps.TrafficLayer();
-// 	trafficLayer.setMap(map);
-
-// 	var geocoder = new google.maps.Geocoder;
-
-
-// //////
-// // Distance calculations
-// //////
-
-
-// var service = new google.maps.DistanceMatrixService();
-// service.getDistanceMatrix(
-// 	{
-// 		origins: [origin2],
-// 		destinations: [destinationA],
-// 		travelMode: 'DRIVING',
-// 		drivingOptions: {
-// 			departureTime: new Date(Date.now()), //leaveing now-ish
-// 			trafficModel: 'pessimistic'
-// 		},
-// 		unitSystem: google.maps.UnitSystem.IMPERIAL,
-// 		avoidHighways: false,
-// 		avoidTolls: false
-// 	}, callback);
-
-// }
 
 var eventName = '';
 var eventTime = '';
@@ -113,10 +39,18 @@ $("#submitInfo").on("click", function (event) {
 
 // Directions Service API
 function initMap() {
+
+	// Google map directions varibles
+	// // links to direction service
 	var directionsService = new google.maps.DirectionsService();
+
+	// // renders directions
 	var directionsDisplay = new google.maps.DirectionsRenderer();
+
 	// var haight = new google.maps.LatLng(37.7699298, -122.4469157);
 	// var oceanBeach = new google.maps.LatLng(37.7683909618184, -122.51089453697205);
+
+	// object that sets parameters of map when initilized
 	var myOrigin = orig;
 	var myDestination = dest;
 	// console.log(tdOrig, tdDest);
@@ -125,9 +59,17 @@ function initMap() {
 		zoom: 14,
 		center: uofuSandy
 	}
+
+	// creates map varible and links to html id #map, and adds reference to mapOptiona Object.
 	var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+	// calls Google's method to display directions using map varible.
 	directionsDisplay.setMap(map);
+
+	// empties #directionsPanel -------------------------------NOPE! 
 	$("#directionsPanel").html('');
+
+
 	// directionsDisplay.setPanel(document.getElementById('directionsPanel')); //TODO: uncomment this to show directions
 	calcRoute(myOrigin, myDestination, directionsService, directionsDisplay);
 	$('#modes').change(function () {
@@ -156,7 +98,7 @@ function calcRoute(myOrigin, myDestination, directionsService, directionsDisplay
 
 	directionsService.route(request, function (response, status) {
 		// console.log(response);
-		// console.log(response.routes[0].legs[0].duration_in_traffic);
+		console.log(response.routes[0].legs[0].duration_in_traffic);
 		if (status == 'OK') {
 			directionsDisplay.setDirections(response);
 			travelTime = response.routes[0].legs[0].duration_in_traffic.text;
@@ -167,7 +109,7 @@ function calcRoute(myOrigin, myDestination, directionsService, directionsDisplay
 			console.log("Leave By: " + leaveBy);
 
 			// Save the new data in Firebase -- may need to move this so it doesn't add a row each time traffic or travel modes are changed.
-			
+
 			database.ref().push({
 				FBeventName: eventName,
 				FBeventTime: eventTime,
@@ -237,9 +179,50 @@ function initMapAgain() {
 		zoom: 14,
 		center: uofuSandy
 	}
+	var directionsClosed = true;
 	var map = new google.maps.Map(document.getElementById('map'), mapOptions);
 	directionsDisplay.setMap(map);
 	$("#directionsPanel").html('');
+
+	// temp comment while testing modal
+// 	// uses arrow notation () => only works with non-method functions
+// 	$("#shdirections").on("click", () => {
+// 		// calcRoute();
+// 		if (directionsClosed) {
+// 			directionsClosed = false;
+// 			$("#shdirections").addClass("hidden");
+// 			$("#hidedirections").removeClass("hidden");
+// 			directionsDisplay.setPanel(document.getElementById('directionsPanel'));
+// 		}
+
+// 	});
+// // uses arrow notation () => only works with non-method functions
+// 	$("#hidedirections").on("click", () => {
+	
+// 		if (directionsClosed === false) {
+			
+// 			directionsClosed = true;
+// 			$("#shdirections").removeClass("hidden");
+// 			$("#hidedirections").addClass("hidden");
+// 			directionsDisplay.set('directions', null);
+// 		}
+
+			// uses arrow notation () => only works with non-method functions
+	$("#modal-button").on("click", () => {
+		// calcRoute();
+		if (directionsClosed) {
+			directionsClosed = false;
+			$("#shdirections").addClass("hidden");
+			$("#hidedirections").removeClass("hidden");
+			directionsDisplay.setPanel(document.getElementById('directionsPanel'));
+		}else if (directionsClosed === false) {
+			
+			directionsClosed = true;
+			$("#shdirections").removeClass("hidden");
+			$("#hidedirections").addClass("hidden");
+			directionsDisplay.set('directions', null);
+		}
+	});
 	// directionsDisplay.setPanel(document.getElementById('directionsPanel')); //TODO: uncomment this to show directions
 
 	// From calcRoute
@@ -269,41 +252,41 @@ function initMapAgain() {
 
 // To sort items in the table by time, oldest first
 function sortTable() {
-  var table, switching, i, x, y, shouldSwitch;
-  table = document.getElementById("all-display");
-  switching = true;
+	var table, switching, i, x, y, shouldSwitch;
+	table = document.getElementById("all-display");
+	switching = true;
   /*Make a loop that will continue until
   no switching has been done:*/
-  while (switching) {
-    //start by saying: no switching is done:
-    switching = false;
-    rows = table.getElementsByTagName("TR");
+	while (switching) {
+		//start by saying: no switching is done:
+		switching = false;
+		rows = table.getElementsByTagName("TR");
     /*Loop through all table rows (except the
     first, which contains table headers):*/
-    for (i = 0; i < (rows.length -1); i++) {
-      //start by saying there should be no switching:
-      shouldSwitch = false;
+		for (i = 0; i < (rows.length - 1); i++) {
+			//start by saying there should be no switching:
+			shouldSwitch = false;
       /*Get the two elements you want to compare,
       one from current row and one from the next:*/
-      x = rows[i].getElementsByTagName("TD")[3];
+			x = rows[i].getElementsByTagName("TD")[3];
 			y = rows[i + 1].getElementsByTagName("TD")[3];
-      //check if the two rows should switch place:
-      if (moment(x.innerHTML) > moment(y.innerHTML)) {
-        //if so, mark as a switch and break the loop:
-				shouldSwitch= true;
+			//check if the two rows should switch place:
+			if (moment(x.innerHTML) > moment(y.innerHTML)) {
+				//if so, mark as a switch and break the loop:
+				shouldSwitch = true;
 				break;
 			}
-    }
-    if (shouldSwitch) {
+		}
+		if (shouldSwitch) {
       /*If a switch has been marked, make the switch
       and mark that a switch has been done:*/
-      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+			rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
 			switching = true;
 		}
 	}
 }
 
-function getFirstRow () {
+function getFirstRow() {
 	var firstRow = rows[0];
 	var arrayOfTDs = [];
 	arrayOfTDs.push(firstRow.getElementsByTagName("td"));
@@ -341,6 +324,7 @@ setTimeout(getFirstRow, 2000);
 
 // callback();
 
+// removed Google Calendar due to Auth. compatability issues; using firebase auth vs. google api auth. ... additionally calendar did not populate, unknown if due to auth issues. 
 
 ///////----------------------------------------------------------------------------------------------------------------------------------
 // Google calendar API
