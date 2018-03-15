@@ -152,3 +152,7 @@ body {
  #directionsPanel {
 	background: rgba(255, 255, 255, 0.699);
 }
+
+.panel-footer {
+	margin-top: 30px;
+}
