@@ -90,7 +90,7 @@ function initMap() {
 
 	// // renders directions
 	var directionsDisplay = new google.maps.DirectionsRenderer();
-	
+
 	// var haight = new google.maps.LatLng(37.7699298, -122.4469157);
 	// var oceanBeach = new google.maps.LatLng(37.7683909618184, -122.51089453697205);
 
@@ -112,6 +112,8 @@ function initMap() {
 
 	// empties #directionsPanel -------------------------------NOPE! 
 	$("#directionsPanel").html('');
+
+
 	// directionsDisplay.setPanel(document.getElementById('directionsPanel')); //TODO: uncomment this to show directions
 	calcRoute(myOrigin, myDestination, directionsService, directionsDisplay);
 	$('#modes').change(function () {
@@ -121,6 +123,14 @@ function initMap() {
 	// 	calcRoute(myOrigin, myDestination, directionsService, directionsDisplay);
 	// });
 }
+
+function showDirections() {
+	$("#shdirections").on("click", () => {
+		// calcRoute();
+		directionsDisplay.setPanel(document.getElementById('directionsPanel'));
+	})
+};
+
 
 function calcRoute(myOrigin, myDestination, directionsService, directionsDisplay) {
 	var selectedMode = document.getElementById('mode').value;
@@ -151,7 +161,7 @@ function calcRoute(myOrigin, myDestination, directionsService, directionsDisplay
 			console.log("Leave By: " + leaveBy);
 
 			// Save the new data in Firebase -- may need to move this so it doesn't add a row each time traffic or travel modes are changed.
-			
+
 			database.ref().push({
 				FBeventName: eventName,
 				FBeventTime: eventTime,
@@ -218,9 +228,36 @@ function initMapAgain() {
 		zoom: 14,
 		center: uofuSandy
 	}
+	var directionsClosed = true;
 	var map = new google.maps.Map(document.getElementById('map'), mapOptions);
 	directionsDisplay.setMap(map);
 	$("#directionsPanel").html('');
+
+	$("#shdirections").on("click", () => {
+		// calcRoute();
+		if (directionsClosed) {
+			directionsClosed = false;
+			$("#shdirections").addClass("hidden");
+			$("#hidedirections").removeClass("hidden");
+			directionsDisplay.setPanel(document.getElementById('directionsPanel'));
+		} else if (directionsClosed === false) {
+			// document.getElementById('directionsPanel');
+			directionsClosed = true;
+			$("#shdirections").removeClass("hidden");
+			$("#directionsPanel").html('');
+		}
+	});
+
+	$("#hidedirections").on("click", () => {
+		// calcRoute();
+		if (directionsClosed === false) {
+			// document.getElementById('directionsPanel');
+			directionsClosed = true;
+			$("#shdirections").removeClass("hidden");
+			$("#hidedirections").addClass("hidden");
+			$("#directionsPanel").html('');
+		}
+	});
 	// directionsDisplay.setPanel(document.getElementById('directionsPanel')); //TODO: uncomment this to show directions
 
 	// From calcRoute
@@ -250,41 +287,41 @@ function initMapAgain() {
 
 // To sort items in the table by time, oldest first
 function sortTable() {
-  var table, switching, i, x, y, shouldSwitch;
-  table = document.getElementById("all-display");
-  switching = true;
+	var table, switching, i, x, y, shouldSwitch;
+	table = document.getElementById("all-display");
+	switching = true;
   /*Make a loop that will continue until
   no switching has been done:*/
-  while (switching) {
-    //start by saying: no switching is done:
-    switching = false;
-    rows = table.getElementsByTagName("TR");
+	while (switching) {
+		//start by saying: no switching is done:
+		switching = false;
+		rows = table.getElementsByTagName("TR");
     /*Loop through all table rows (except the
     first, which contains table headers):*/
-    for (i = 0; i < (rows.length -1); i++) {
-      //start by saying there should be no switching:
-      shouldSwitch = false;
+		for (i = 0; i < (rows.length - 1); i++) {
+			//start by saying there should be no switching:
+			shouldSwitch = false;
       /*Get the two elements you want to compare,
       one from current row and one from the next:*/
-      x = rows[i].getElementsByTagName("TD")[3];
+			x = rows[i].getElementsByTagName("TD")[3];
 			y = rows[i + 1].getElementsByTagName("TD")[3];
-      //check if the two rows should switch place:
-      if (moment(x.innerHTML) > moment(y.innerHTML)) {
-        //if so, mark as a switch and break the loop:
-				shouldSwitch= true;
+			//check if the two rows should switch place:
+			if (moment(x.innerHTML) > moment(y.innerHTML)) {
+				//if so, mark as a switch and break the loop:
+				shouldSwitch = true;
 				break;
 			}
-    }
-    if (shouldSwitch) {
+		}
+		if (shouldSwitch) {
       /*If a switch has been marked, make the switch
       and mark that a switch has been done:*/
-      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+			rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
 			switching = true;
 		}
 	}
 }
 
-function getFirstRow () {
+function getFirstRow() {
 	var firstRow = rows[0];
 	var arrayOfTDs = [];
 	arrayOfTDs.push(firstRow.getElementsByTagName("td"));

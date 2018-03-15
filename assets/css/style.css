@@ -156,3 +156,9 @@ body {
 .panel-footer {
 	margin-top: 30px;
 }
+
+/* spaceing between signout btn and right edge/username */
+.btn {
+	margin-right: 5px;
+	margin-left: 5px;
+}
