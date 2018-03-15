@@ -194,7 +194,10 @@ database.ref().on("child_added", function (snapshot) {
 	key = snapshot.key;
 	// console.log(snapshot);
 	// console.log(key);
-
+	if (moment() > moment(tdEventTime)) {
+		console.log(database.ref(key) + " is in the past, removing.");
+		database.ref(key).remove();
+	}
 
 	$("#all-display").append("<tr id=" + "'" + key + "'" + "><td><label><input type='radio' name='optionsRadios' class='mapRadio' id=" + "'optionsRadios" + key + "'" + " value=" + "'option" + key + "'" + "></label></td><td>" + tdEventName + "</td><td>" + tdDest + "</td><td>" + tdEventTime + "</td><td>" + tdTtime + "</td><td>" + tdLeaveBy + "</td><td><button class='removeBtn btn btn-danger btn-xs'>x</button></td></tr>");
 
