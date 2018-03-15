@@ -2,7 +2,7 @@
 ///////----------------------------------------------------------------------------------------------------------------------------------
 // Google Maps API
 ///////----------------------------------------------------------------------------------------------------------------------------------
-
+var userId;
 var eventName = '';
 var eventTime = '';
 var orig = '';
@@ -177,8 +177,9 @@ function calcRoute(myOrigin, myDestination, directionsService, directionsDisplay
 			console.log("Leave By: " + leaveBy);
 
 			// Save the new data in Firebase -- may need to move this so it doesn't add a row each time traffic or travel modes are changed.
-
-			database.ref().push({
+			userId = firebase.auth().currentUser.uid;
+			console.log(userId);
+			database.ref('users/' + userId).push({
 				FBeventName: eventName,
 				FBeventTime: eventTime,
 				FBorig: orig,
@@ -192,8 +193,8 @@ function calcRoute(myOrigin, myDestination, directionsService, directionsDisplay
 }
 
 // Each time a child, or trip, is added to the database, add it to the DOM and map
-database.ref().on("child_added", function (snapshot) {
-	//console.log("I had a child!");
+database.ref('users/' + userId).on("child_added", function (snapshot) {
+	console.log("I had a child!");
 	tdEventName = snapshot.val().FBeventName;
 	tdOrig = snapshot.val().FBorig;
 	tdDest = snapshot.val().FBdest;
@@ -203,10 +204,10 @@ database.ref().on("child_added", function (snapshot) {
 
 	key = snapshot.key;
 	// console.log(snapshot);
-	// console.log(key);
+	console.log(key);
 	if (moment() > moment(tdEventTime)) {
-		console.log(database.ref(key) + " is in the past, removing.");
-		database.ref(key).remove();
+		console.log(database.ref('users/' + userId + "/" + key) + " is in the past, removing.");
+		database.ref('users/' + userId + "/" + key).remove();
 	}
 
 	$("#all-display").append("<tr id=" + "'" + key + "'" + "><td><label><input type='radio' name='optionsRadios' class='mapRadio' id=" + "'optionsRadios" + key + "'" + " value=" + "'option" + key + "'" + "></label></td><td>" + tdEventName + "</td><td>" + tdDest + "</td><td>" + tdEventTime + "</td><td>" + tdTtime + "</td><td>" + tdLeaveBy + "</td><td><button class='removeBtn btn btn-danger btn-xs'>x</button></td></tr>");
@@ -218,13 +219,13 @@ database.ref().on("child_added", function (snapshot) {
 $("body").on("click", ".removeBtn", function () {
 	$(this).closest('tr').remove();
 	getKey = $(this).parent().parent().attr('id');
-	database.ref().child(getKey).remove();
+	database.ref('users/' + userId).child(getKey).remove();
 });
 
 // Show the directions on the map for selected row when the radio button is clicked
 $("body").on("click", ".mapRadio", function () {
 	getKey = $(this).parent().parent().parent().attr('id');
-	database.ref("/" + getKey + "").once("value", function (childSnapshot) {
+	database.ref('users/' + userId + "/" + getKey + "").once("value", function (childSnapshot) {
 		// console.log(childSnapshot.val().FBorig);
 		orig = childSnapshot.val().FBorig;
 		dest = childSnapshot.val().FBdest;
@@ -394,10 +395,10 @@ function geocodeLatLng(geocoder, userLat, userLng) {
 				console.log(results[0].formatted_address);
         infowindow.open(map, marker);
       } else {
-        window.alert('No results found');
+        infowindow.setContent('No results found');
       }
     } else {
-      window.alert('Geocoder failed due to: ' + status);
+      infowindow.setContent('Geocoder failed due to: ' + status);
     }
   });
 }
