@@ -50,6 +50,7 @@ body {
 /* Map */
 #map {
  height: 400px;
+ color: black;
 }
 
 /* Panel Header */
