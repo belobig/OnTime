@@ -92,8 +92,11 @@ function initMap() {
 	
 	// var haight = new google.maps.LatLng(37.7699298, -122.4469157);
 	// var oceanBeach = new google.maps.LatLng(37.7683909618184, -122.51089453697205);
+<<<<<<< HEAD
 
 	// object that sets parameters of map when initilized
+=======
+>>>>>>> master
 	var myOrigin = orig;
 	var myDestination = dest;
 	// console.log(tdOrig, tdDest);
