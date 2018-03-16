@@ -5,12 +5,16 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+	<!-- Various firebase script links -->
 	<script src="https://cdn.firebase.com/libs/firebaseui/2.6.2/firebaseui.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
 	<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.6.2/firebaseui.css" />
-	<link rel="icon" href="assets/images/eberhard-grossgasteiger-521851-unsplash.jpg" type="image/gif">
-	<title>OnTime</title>
 
+	<!-- background link -->
+	<link rel="icon" href="assets/images/eberhard-grossgasteiger-521851-unsplash.jpg" type="image/gif">
+
+	<title>OnTime</title>
 
 	<!-- temp: bootstrap cdn link -->
 	<!-- Latest compiled and minified CSS -->
@@ -25,7 +29,7 @@
 
 <body>
 
-	
+
 	<!-- navbar -->
 	<nav class="navbar navbar-default fixed72">
 		<div class="container-fluid fixed72">
@@ -47,7 +51,7 @@
 			</ul>
 		</div>
 	</nav>
-	
+
 	<div class="wrapper">
 		<!-- map -->
 		<div class="container">
@@ -99,21 +103,21 @@
 									</select>
 								</div>
 							</div> -->
+
 							<!-- Display Map -->
 							<div id="map"></div>
-							<!-- <div id="directionsPanel" style="float:right;width:100%;height: 100%"> -->
+
 
 						</div>
-						<button type="submit" class="btn btn-primary btn-sm" id="shdirections">Show Directions</button>
 
-						<button type="submit" class="btn btn-primary btn-sm hidden" id="hidedirections">Hide</button>
+						<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal" id="modal-button">Show Directions</button>
 
-						<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal" id="modal-button">modal</button>
+
+
 
 					</div>
 				</div>
 			</div>
-
 			<!-- New event form -->
 			<div class="row">
 				<div class="col-sm-12 col-md-12 col-lg-12">
@@ -175,6 +179,7 @@
 			</div>
 
 			<!-- Calendar -->
+			<!-- currently unlinked because of auth issues -->
 			<div class="row">
 				<div class="col-sm-12 col-md-12 col-lg-12">
 					<div class="panel panel-default">
@@ -187,24 +192,12 @@
 					</div>
 				</div>
 			</div>
-
-			<!-- Appointment Table -->
-			<div class="row">
-				<div class="col-sm-12 col-md-12 col-lg-12">
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<h3 class="panel-title">Appointments</h3>
-						</div>
-						<div class="panel-body">
-							Panel content
-						</div>
-					</div>
-				</div>
-			</div>
 			<!-- End Container -->
 		</div>
+
 		<!-- End Wrapper -->
 	</div>
+
 
 
 
@@ -224,12 +217,11 @@
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">Modal title</h4>
-				</div>
-				<!-- does not seem to pull any data? -->
-				<div class="modal-body" id="directionsPanel">
 
+					<h4 class="modal-title" id="myModalLabel">Here are the directions to your event</h4>
 				</div>
+				<div class="modal-body" id="directionsPanel"></div>
+
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>
@@ -241,18 +233,23 @@
 	<!-- Adding JQuery -->
 	<script src="./assets/javascript/jquery-3.3.1.min.js"></script>
 
+	<!-- linking Bootstrap.js, renamed because of read errors... -->
 	<script src="assets/javascript/bs.js"></script>
-	<script>
 
+	<!-- tooltip for signout button -->
+	<script>
 		$(document).ready(function () {
 			$('[data-toggle="tooltip"]').tooltip();
 		});
 	</script>
+
+	<!-- adding moment.js for time manipulation -->
 	<script src="assets/javascript/moment.js"></script>
 
+	<!-- Script link for ontime.js, handles firebase Auth. -->
 	<script src="assets/javascript/ontime.js"></script>
 
-	<!-- Adding link to API via api.js -->
+	<!-- Adding link to APIs via api.js -->
 	<script src="./assets/javascript/api.js"></script>
 
 	<!-- script link to google map api, runs callback function -->
