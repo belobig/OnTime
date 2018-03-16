@@ -29,7 +29,7 @@
 
 <body>
 
-	
+
 	<!-- navbar -->
 	<nav class="navbar navbar-default fixed72">
 		<div class="container-fluid fixed72">
@@ -51,7 +51,7 @@
 			</ul>
 		</div>
 	</nav>
-	
+
 	<div class="wrapper">
 		<!-- map -->
 		<div class="container">
@@ -118,91 +118,88 @@
 					</div>
 				</div>
 			</div>
-		</div>
-
-		<!-- New event form -->
-		<div class="row">
-			<div class="col-sm-12 col-md-12 col-lg-12">
-				<div class="panel panel-default">
-					<div class="panel-body">
-						<form>
-							<div class="form-group">
-								<label for="name">Event Name</label>
-								<input type="text" class="form-control" id="name" placeholder="Dentist Appointment">
-							</div>
-							<div class="form-group">
-								<label for="time">Event Date & Time</label>
-								<input type="datetime-local" class="form-control" id="time" placeholder="">
-							</div>
-							<div class="form-group">
-								<label for="origin">Origin</label>
-								<button type="button" class="btn btn-primary btn-xs" id="getUserLocation">Use My Location</button>
-								<input type="text" class="form-control" id="origin" placeholder="Salt Lake City, UT">
-							</div>
-							<div class="form-group">
-								<label for="dest">Destination</label>
-								<input type="text" class="form-control" id="dest" placeholder="Boise, ID">
-							</div>
-							<button type="submit" class="btn btn-primary" id="submitInfo">Submit</button>
-						</form>
+			<!-- New event form -->
+			<div class="row">
+				<div class="col-sm-12 col-md-12 col-lg-12">
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<form>
+								<div class="form-group">
+									<label for="name">Event Name</label>
+									<input type="text" class="form-control" id="name" placeholder="Dentist Appointment">
+								</div>
+								<div class="form-group">
+									<label for="time">Event Date & Time</label>
+									<input type="datetime-local" class="form-control" id="time" placeholder="">
+								</div>
+								<div class="form-group">
+									<label for="origin">Origin</label>
+									<button type="button" class="btn btn-primary btn-xs" id="getUserLocation">Use My Location</button>
+									<input type="text" class="form-control" id="origin" placeholder="Salt Lake City, UT">
+								</div>
+								<div class="form-group">
+									<label for="dest">Destination</label>
+									<input type="text" class="form-control" id="dest" placeholder="Boise, ID">
+								</div>
+								<button type="submit" class="btn btn-primary" id="submitInfo">Submit</button>
+							</form>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
 
-		<!-- User input table -->
-		<div class="row">
-			<div class="col-sm-12 col-md-12 col-lg-12">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">Scheduled Events</h3>
-					</div>
-					<div class="panel-body">
-						<table class="table">
-							<thead>
-								<tr>
-									<th>Map</th>
-									<th>Event Name</th>
-									<th>Location</th>
-									<th>Event Time</th>
-									<th>Travel Time</th>
-									<th>Leave By</th>
-									<th>X</th>
-								</tr>
-							</thead>
-							<div class="radio">
-								<tbody id="all-display">
-								</tbody>
-							</div>
-						</table>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<!-- Calendar -->
-		<!-- currently unlinked because of auth issues -->
-		<div class="row">
-			<div class="col-sm-12 col-md-12 col-lg-12">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">Calendar</h3>
-					</div>
-					<div class="panel-body">
-						<pre id="calendar"></pre>
+			<!-- User input table -->
+			<div class="row">
+				<div class="col-sm-12 col-md-12 col-lg-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Scheduled Events</h3>
+						</div>
+						<div class="panel-body">
+							<table class="table">
+								<thead>
+									<tr>
+										<th>Map</th>
+										<th>Event Name</th>
+										<th>Location</th>
+										<th>Event Time</th>
+										<th>Travel Time</th>
+										<th>Leave By</th>
+										<th>X</th>
+									</tr>
+								</thead>
+								<div class="radio">
+									<tbody id="all-display">
+									</tbody>
+								</div>
+							</table>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
 
-
-			
+			<!-- Calendar -->
+			<!-- currently unlinked because of auth issues -->
+			<div class="row">
+				<div class="col-sm-12 col-md-12 col-lg-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Calendar</h3>
+						</div>
+						<div class="panel-body">
+							<pre id="calendar"></pre>
+						</div>
+					</div>
+				</div>
+			</div>
 			<!-- End Container -->
-
 		</div>
+
+		<!-- End Wrapper -->
 	</div>
-	<!-- End Wrapper -->
-	</div>
+
+
+
 
 
 
