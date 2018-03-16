@@ -178,7 +178,7 @@ function calcRoute(myOrigin, myDestination, directionsService, directionsDisplay
 
 			// Save the new data in Firebase -- may need to move this so it doesn't add a row each time traffic or travel modes are changed.
 			userId = firebase.auth().currentUser.uid;
-			console.log(userId);
+			// console.log(userId);
 			database.ref('users/' + userId).push({
 				FBeventName: eventName,
 				FBeventTime: eventTime,
@@ -205,8 +205,8 @@ function loadTable() {
 		tdLeaveBy = snapshot.val().FBleaveBy;
 
 		key = snapshot.key;
-		console.log(snapshot);
-		console.log(key);
+		// console.log(snapshot);
+		// console.log(key);
 		if (moment() > moment(tdEventTime)) {
 			console.log(database.ref('users/' + userId + "/" + key) + " is in the past, removing.");
 			database.ref('users/' + userId + "/" + key).remove();
@@ -354,7 +354,7 @@ function geocodeLatLng(geocoder, userLat, userLng) {
 	var input = (userLat + "," + userLng);
 	var latlngStr = input.split(',', 2);
 	var latlng = { lat: parseFloat(latlngStr[0]), lng: parseFloat(latlngStr[1]) };
-	console.log(latlng);
+	// console.log(latlng);
 	var map = new google.maps.Map(document.getElementById('map'), {
 		zoom: 14,
 		center: userLocation
