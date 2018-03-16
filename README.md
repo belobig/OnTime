@@ -16,22 +16,22 @@ Technologies:
 - Python (for testing Auth. locally)
 How to setup for your self:
 1. Go to Python.org
-<img src='assets/images/GoToPython.org.png'>
+<img src='assets/images/GoToPython.org.PNG'>
 2. 'Click here' 
-(./assets/images/pythonClickHere.png)
+<img src='./assets/images/pythonClickHere.PNG'>
 3. Scroll down to see downloads section
-<img src='assets/images/scrollDown.png'>
+<img src='assets/images/scrollDown.PNG'>
 4. Select your exe version (32 bit or 64 bit)
-(./assets/images/downloadsSection.png)
-5. (./assets/images/downloadsBar.png)
+<img src='./assets/images/downloadsSection.PNG'>
+5. <img src='./assets/images/downloadsBar.PNG'>
 6. Make sure to select PATH check box, unneed for MAC.
-(./assets/images/installationandPATH.png)
-7. (./assets/images/cmd.png)
-8. (./assets/images/localhost.png)
+<img src='./assets/images/installationandPATH.PNG'>
+7. <img src='./assets/images/cmd.PNG'>
+8. <img src='./assets/images/localhost.PNG'>
 
 - Firebase v4.10.1
 - Many... Google APIs 
-(./assets/images/googleAPIList.png)
+<img src='./assets/images/googleAPIList.png'>
 - Bootstrap v3.3.7 (css, js, etc)
 - JQuery v3.3.1
 - Moment.js (for manipulation of time elements)
@@ -39,5 +39,5 @@ How to setup for your self:
 
 Future Developements:
 - Use Google Calendar instead of database
-(./assets/images/Google Calendar.png)
+<img src='./assets/images/Google Calendar.PNG'>
 - Prompt to change 'how early' to the event
