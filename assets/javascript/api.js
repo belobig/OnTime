@@ -252,42 +252,15 @@ function initMapAgain() {
 	var map = new google.maps.Map(document.getElementById('map'), mapOptions);
 	directionsDisplay.setMap(map);
 
-	// temp comment while testing modal
-	// 	// uses arrow notation () => only works with non-method functions
-	// 	$("#shdirections").on("click", () => {
-	// 		// calcRoute();
-	// 		if (directionsClosed) {
-	// 			directionsClosed = false;
-	// 			$("#shdirections").addClass("hidden");
-	// 			$("#hidedirections").removeClass("hidden");
-	// 			directionsDisplay.setPanel(document.getElementById('directionsPanel'));
-	// 		}
-
-	// 	});
-	// // uses arrow notation () => only works with non-method functions
-	// 	$("#hidedirections").on("click", () => {
-
-	// 		if (directionsClosed === false) {
-
-	// 			directionsClosed = true;
-	// 			$("#shdirections").removeClass("hidden");
-	// 			$("#hidedirections").addClass("hidden");
-	// 			directionsDisplay.set('directions', null);
-	// 		}
-
 	// uses arrow notation () => only works with non-method functions
 	$("#modal-button").on("click", () => {
 		// calcRoute();
 		if (directionsClosed) {
 			directionsClosed = false;
-			$("#shdirections").addClass("hidden");
-			$("#hidedirections").removeClass("hidden");
 			directionsDisplay.setPanel(document.getElementById('directionsPanel'));
 		} else if (directionsClosed === false) {
-
 			directionsClosed = true;
-			$("#shdirections").removeClass("hidden");
-			$("#hidedirections").addClass("hidden");
+			// clears #directionsPanel
 			directionsDisplay.set('directions', null);
 		}
 	});
@@ -375,63 +348,36 @@ $("#getUserLocation").click(function () {
 function geocodeLatLng(geocoder, userLat, userLng) {
 	var input = (userLat + "," + userLng);
 	var latlngStr = input.split(',', 2);
-	var latlng = {lat: parseFloat(latlngStr[0]), lng: parseFloat(latlngStr[1])};
+	var latlng = { lat: parseFloat(latlngStr[0]), lng: parseFloat(latlngStr[1]) };
 	console.log(latlng);
 	var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 14,
-    center: userLocation
+		zoom: 14,
+		center: userLocation
 	});
 	var infowindow = new google.maps.InfoWindow;
-  geocoder.geocode({'location': latlng}, function(results, status) {
-    if (status === 'OK') {
-      if (results[0]) {
-        map.setZoom(14);
-        var marker = new google.maps.Marker({
-          position: latlng,
-          map: map
-        });
+	geocoder.geocode({ 'location': latlng }, function (results, status) {
+		if (status === 'OK') {
+			if (results[0]) {
+				map.setZoom(14);
+				var marker = new google.maps.Marker({
+					position: latlng,
+					map: map
+				});
 				infowindow.setContent(results[0].formatted_address);
 				$("#origin").val(results[0].formatted_address);
 				console.log(results[0].formatted_address);
-        infowindow.open(map, marker);
-      } else {
-        infowindow.setContent('No results found');
-      }
-    } else {
-      infowindow.setContent('Geocoder failed due to: ' + status);
-    }
-  });
+				infowindow.open(map, marker);
+			} else {
+				infowindow.setContent('No results found');
+			}
+		} else {
+			infowindow.setContent('Geocoder failed due to: ' + status);
+		}
+	});
 }
 
-// function callback(response, status) {
-// 	if (status == 'OK') {
-// 		// console.log(response);
-// 		var origins = response.originAddresses;
-// 		var destinations = response.destinationAddresses;
-// 		// console.log(response.originAddresses);
-// 		// console.log(response.destinationAddresses);
-// 		for (var i = 0; i < origins.length; i++) {
-// 			var results = response.rows[i].elements;
-// 			console.log(results);
-// 			for (var j = 0; j < results.length; j++) {
-// 				var element = results[j];
-// 				var distance = element.distance.text;
-// 				var duration = element.duration.text;
-// 				var from = origins[i];
-// 				var to = destinations[j];
-// 				console.log(element);
-// 				console.log(distance);
-// 				console.log(duration);
-// 				console.log(from);
-// 				console.log(to);
-// 			}
-// 		}
-// 	}
-// }
 
-// callback();
-
-// removed Google Calendar due to Auth. compatability issues; using firebase auth vs. google api auth. ... additionally calendar did not populate, unknown if due to auth issues. 
+// removed Google Calendar due to Auth. compatability issues; using firebase auth. vs. google api auth. ... additionally calendar did not populate, unknown if due to auth. issues. 
 
 ///////----------------------------------------------------------------------------------------------------------------------------------
 // Google calendar API
