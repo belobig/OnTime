@@ -16,11 +16,11 @@ Technologies:
 - Python (for testing Auth. locally)
 How to setup for your self:
 1. Go to Python.org
-(./assets/images/GoToPython.org.png)
+<img src='assets/images/GoToPython.org.png'>
 2. 'Click here' 
 (./assets/images/pythonClickHere.png)
 3. Scroll down to see downloads section
-(./assets/images/scrollDown.png)
+<img src='assets/images/scrollDown.png'>
 4. Select your exe version (32 bit or 64 bit)
 (./assets/images/downloadsSection.png)
 5. (./assets/images/downloadsBar.png)
