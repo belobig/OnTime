@@ -16,7 +16,7 @@ Technologies:
 - Python (for testing Auth. locally)
 How to setup for your self:
 1. Go to Python.org
-<img src='./assets/images/GoToPython.org.png'>
+<img src='assets/images/GoToPython.org.png'>
 2. 'Click here' 
 (./assets/images/pythonClickHere.png)
 3. Scroll down to see downloads section
