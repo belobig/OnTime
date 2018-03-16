@@ -193,27 +193,32 @@ function calcRoute(myOrigin, myDestination, directionsService, directionsDisplay
 }
 
 // Each time a child, or trip, is added to the database, add it to the DOM and map
-database.ref('users/' + userId).on("child_added", function (snapshot) {
-	console.log("I had a child!");
-	tdEventName = snapshot.val().FBeventName;
-	tdOrig = snapshot.val().FBorig;
-	tdDest = snapshot.val().FBdest;
-	tdEventTime = moment(snapshot.val().FBeventTime).format("MM-DD-YYYY h:mm A");
-	tdTtime = snapshot.val().FBtTime;
-	tdLeaveBy = snapshot.val().FBleaveBy;
+function loadTable() {
+	userId = firebase.auth().currentUser.uid;
+	database.ref('users/' + userId).on("child_added", function (snapshot) {
+		console.log("I had a child!");
+		tdEventName = snapshot.val().FBeventName;
+		tdOrig = snapshot.val().FBorig;
+		tdDest = snapshot.val().FBdest;
+		tdEventTime = moment(snapshot.val().FBeventTime).format("MM-DD-YYYY h:mm A");
+		tdTtime = snapshot.val().FBtTime;
+		tdLeaveBy = snapshot.val().FBleaveBy;
 
-	key = snapshot.key;
-	// console.log(snapshot);
-	console.log(key);
-	if (moment() > moment(tdEventTime)) {
-		console.log(database.ref('users/' + userId + "/" + key) + " is in the past, removing.");
-		database.ref('users/' + userId + "/" + key).remove();
-	}
+		key = snapshot.key;
+		console.log(snapshot);
+		console.log(key);
+		if (moment() > moment(tdEventTime)) {
+			console.log(database.ref('users/' + userId + "/" + key) + " is in the past, removing.");
+			database.ref('users/' + userId + "/" + key).remove();
+		}
 
-	$("#all-display").append("<tr id=" + "'" + key + "'" + "><td><label><input type='radio' name='optionsRadios' class='mapRadio' id=" + "'optionsRadios" + key + "'" + " value=" + "'option" + key + "'" + "></label></td><td>" + tdEventName + "</td><td>" + tdDest + "</td><td>" + tdEventTime + "</td><td>" + tdTtime + "</td><td>" + tdLeaveBy + "</td><td><button class='removeBtn btn btn-danger btn-xs'>x</button></td></tr>");
+		$("#all-display").append("<tr id=" + "'" + key + "'" + "><td><label><input type='radio' name='optionsRadios' class='mapRadio' id=" + "'optionsRadios" + key + "'" + " value=" + "'option" + key + "'" + "></label></td><td>" + tdEventName + "</td><td>" + tdDest + "</td><td>" + tdEventTime + "</td><td>" + tdTtime + "</td><td>" + tdLeaveBy + "</td><td><button class='removeBtn btn btn-danger btn-xs'>x</button></td></tr>");
 
-	sortTable();
-});
+		sortTable();
+	});
+}
+
+setTimeout (loadTable, 1500);
 
 // Remove the row of appointment information when the Remove button is clicked
 $("body").on("click", ".removeBtn", function () {

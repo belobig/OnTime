@@ -29,30 +29,30 @@
 
 <body>
 
+	
+	<!-- navbar -->
+	<nav class="navbar navbar-default fixed72">
+		<div class="container-fluid fixed72">
+			<a class="navbar-brand" href="#">OnTime</a>
+			<ul class="nav navbar-nav navbar-right">
+				<li>
+					<div id="firebaseui-auth-container"></div>
+				</li>
+				<li>
+					<div id="sign-in">
+						<button class="btn btn-primary" id="signOutBtn" data-toggle="tooltip" data-placement="left" title="Sign Out">
+							<span class="glyphicon glyphicon-log-out"></span>
+						</button>
+					</div>
+				</li>
+				<li>
+					<div id="account-details"></div>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	
 	<div class="wrapper">
-
-		<!-- navbar -->
-		<nav class="navbar navbar-default fixed72">
-			<div class="container-fluid fixed72">
-				<a class="navbar-brand" href="#">OnTime</a>
-				<ul class="nav navbar-nav navbar-right">
-					<li>
-						<div id="firebaseui-auth-container"></div>
-					</li>
-					<li>
-						<div id="sign-in">
-							<button class="btn btn-primary" id="signOutBtn" data-toggle="tooltip" data-placement="left" title="Sign Out">
-								<span class="glyphicon glyphicon-log-out"></span>
-							</button>
-						</div>
-					</li>
-					<li>
-						<div id="account-details"></div>
-					</li>
-				</ul>
-			</div>
-		</nav>
-
 		<!-- map -->
 		<div class="container">
 			<div class="row">
@@ -107,9 +107,13 @@
 							<!-- Display Map -->
 							<div id="map"></div>
 
+
 						</div>
 
 						<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal" id="modal-button">Show Directions</button>
+
+
+
 
 					</div>
 				</div>
@@ -191,22 +195,16 @@
 			</div>
 		</div>
 
-		<!-- Appointment Table -->
-		<div class="row">
-			<div class="col-sm-12 col-md-12 col-lg-12">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">Appointments</h3>
-					</div>
-					<div class="panel-body">
-						Panel content
-					</div>
-				</div>
-			</div>
+
+			
+			<!-- End Container -->
+
 		</div>
 	</div>
 	<!-- End Wrapper -->
 	</div>
+
+
 
 
 	<!-- Footer -->
@@ -224,9 +222,11 @@
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
+
 					<h4 class="modal-title" id="myModalLabel">Here are the directions to your event</h4>
 				</div>
 				<div class="modal-body" id="directionsPanel"></div>
+
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>
