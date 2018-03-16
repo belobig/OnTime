@@ -20,7 +20,7 @@ How to setup for your self:
 2. 'Click here' 
 (./assets/images/pythonClickHere.png)
 3. Scroll down to see downloads section
-(./assets/images/scrollDown.png)
+<img src='assets/images/scrollDown.png'>
 4. Select your exe version (32 bit or 64 bit)
 (./assets/images/downloadsSection.png)
 5. (./assets/images/downloadsBar.png)
