@@ -105,12 +105,14 @@ body {
  }
 
  .fixed72 {
- 	max-height: 72px;
+	 max-height: 72px;
+	 padding-right: 20px;
+	 padding-top: 5px;
  }
 
 
  .navbar-default .navbar-brand {
-	margin-top: 8px;
+	/* margin-top: 8px; */
 	font-size: 30px;
 	color: rgba(255, 255, 255, 0.822);
  }
